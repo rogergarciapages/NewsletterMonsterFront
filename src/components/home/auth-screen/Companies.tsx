@@ -1,3 +1,4 @@
+
 export const Companies = () => {
     return (
 
@@ -44,7 +45,6 @@ export const Companies = () => {
       </div>
     </div>
   </section>
-
 </div>
 </div>
  );
