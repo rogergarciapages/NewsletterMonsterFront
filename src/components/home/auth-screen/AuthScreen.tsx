@@ -9,7 +9,6 @@ import Companies from './Companies';
 const AuthScreen = () => {
   return (
     <div className="flex flex-col">
-        <ModeToggle />
         <HeroSection />
 
         <div className='mb-20 mt-12'>

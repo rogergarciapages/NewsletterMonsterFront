@@ -10,7 +10,7 @@ const HeroSection = () => {
             pointer-events-none select-none"
             />
         
-        <div className='flex flex-col gap-2 px-4 xl:ml-40 text-center md:text-start font-semibold'>
+        <div className='flex flex-col mx-auto gap-2 px-4 xl:ml-40 mr-40 text-center md:text-start font-semibold'>
             <Image
              src={"/header_dark_logo.png"}
              alt={"NewsletterMonster Logo"}
@@ -22,7 +22,7 @@ const HeroSection = () => {
             <p className="mt-3 mb-3 text-2xl leading-snug text-balance font-thin text-white dark:text-white lg:w-4/5"> 
             We cherish the beauty and creativity of newsletters. <br/> 
             Our mission is to archive these mailing masterpieces, ensuring that their stunning art, 
-            captivating photography, and the hard work of their creators are preserved and celebrated. 
+            captivating photography, and the hard work of their creators are preserved and celebrated. <br/>
             No longer will these treasures be lost in overflowing inboxes — they'll be archived for all to enjoy and admire.</p>
             <AuthButtons  />
             </div>
