@@ -18,7 +18,10 @@ const HeroSection = () => {
              height={182}
              className="mt-20 w-[420px] z-0 pointer-events-none select-none"
             />
-            <h1 className="text-2xl md:text-3xl text-gray-500 pt-3 text-balance">The Newsletter Archive App to rule them  all</h1>
+            <h1 className="text-2xl md:text-5xl text-[#fc0036] pt-3 text-balance">One newsletter Archive to rule them all!</h1>
+            <p className="mt-3 mb-3 text-2xl leading-snug text-balance font-thin text-white dark:text-white lg:w-4/5"> 
+            We cherish the beauty and creativity of newsletters. <br/> 
+            Our mission is to archive these mailing masterpieces, ensuring that their stunning art, captivating photography, and the hard work of their creators are preserved and celebrated. No longer will these treasures be lost in overflowing inboxes — they'll be archived for all to enjoy and admire.</p>
             <AuthButtons  />
             </div>
         </div>

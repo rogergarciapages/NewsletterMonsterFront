@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const AuthButtons = () => {
     const [loading, setloading] = useState(false);
-  return  <div className='flex  gap-3 flex-1 md:flex-row flex-col'>
+  return  <div className='flex gap-3 flex-1 md:flex-row flex-col'>
 
     <RegisterLink className='flex-1' onClick={() => setloading(true)}>
         <Button className='w-full bg-primary' variant={"outline"} disabled={loading}>
