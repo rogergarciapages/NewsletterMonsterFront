@@ -12,35 +12,63 @@ export const Companies = () => {
     </h2>
 
     <div className="grid items-center gap-6 md:grid-cols-2 lg:grid-cols-4">
-      <div className="flex items-center justify-center mb-12 lg:mb-0">
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/landing-page/2.png"
+          src="/brand1.png"
           className="px-6 dark:brightness-150 md:px-12"
-          alt="Nasa - logo"
+          alt="Zara - logo"
         />
       </div>
 
-      <div className="flex items-center justify-center mb-12 lg:mb-0">
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/landing-page/1.png"
+          src="/brand2.png"
           className="px-6 dark:brightness-150 md:px-12"
-          alt="Amazon - logo"
+          alt="GameStop - logo"
         />
       </div>
 
-      <div className="flex items-center justify-center mb-12 lg:mb-0">
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/landing-page/3.png"
+          src="/brand3.png"
           className="px-6 dark:brightness-150 md:px-12"
-          alt="Nike - logo"
+          alt="Huel - logo"
         />
       </div>
 
-      <div className="flex items-center justify-center mb-12 lg:mb-0">
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/landing-page/4.png"
+          src="/brand4.png"
           className="px-6 dark:brightness-150 md:px-12"
-          alt="Ikea - logo"
+          alt="Wired Magazine - logo"
+        />
+      </div>
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
+        <img
+          src="/brand5.png"
+          className="px-6 dark:brightness-150 md:px-12"
+          alt="The New York Times - logo"
+        />
+      </div>
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
+        <img
+          src="/brand6.png"
+          className="px-6 dark:brightness-150 md:px-12"
+          alt="Essence - logo"
+        />
+      </div>
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
+        <img
+          src="/brand7.png"
+          className="px-6 dark:brightness-150 md:px-12"
+          alt="Guns and Ammo - logo"
+        />
+      </div>
+      <div className="flex items-center justify-center mb-12 lg:mb-12">
+        <img
+          src="/brand8.png"
+          className="px-6 dark:brightness-150 md:px-12"
+          alt="The Milk Road - logo"
         />
       </div>
     </div>
