@@ -6,6 +6,7 @@ import RotatedText from '@/components/decorators/RotatedText';
 import MasonryGrid from './MasonryGrid';
 import Companies from './Companies';
 import Mission from '../home-screen/Mission';
+import Footer from '../Footer';
 
 const AuthScreen = () => {
   return (
@@ -21,6 +22,7 @@ const AuthScreen = () => {
                 <MasonryGrid />
                 <Companies />
                 <Mission />
+                <Footer />
             </div>       
 
         </div>
