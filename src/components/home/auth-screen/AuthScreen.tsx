@@ -7,6 +7,8 @@ import MasonryGrid from './MasonryGrid';
 import Companies from './Companies';
 import Mission from '../home-screen/Mission';
 import Footer from '../Footer';
+import H2block from '@/components/h2block';
+import EmailCopy from '@/components/EmailCopy';
 
 const AuthScreen = () => {
   return (
@@ -22,6 +24,8 @@ const AuthScreen = () => {
                 <MasonryGrid />
                 <Companies />
                 <Mission />
+                <H2block />
+                <EmailCopy />
                 <Footer />
             </div>       
 
