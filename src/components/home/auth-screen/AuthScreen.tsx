@@ -9,6 +9,7 @@ import Mission from '../home-screen/Mission';
 import Footer from '../Footer';
 import H2block from '@/components/h2block';
 import EmailCopy from '@/components/EmailCopy';
+import H2TextBlock from '@/components/h2block';
 
 const AuthScreen = () => {
   return (
@@ -24,7 +25,10 @@ const AuthScreen = () => {
                 <MasonryGrid />
                 <Companies />
                 <Mission />
-                <H2block />
+                <H2TextBlock 
+                heading="Our Mission"
+                text="We strive to archive newsletters, ensuring that their stunning art and captivating photography are preserved for all to admire."
+                />
                 <EmailCopy />
                 <Footer />
             </div>       
