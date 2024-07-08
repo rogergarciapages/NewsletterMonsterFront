@@ -7,6 +7,7 @@ import Mission from '../home-screen/Mission';
 import Footer from '../Footer';
 import EmailCopy from '@/components/EmailCopy';
 import H2TextBlock from '@/components/h2block';
+import PricingWrapper from '@/components/Pricing';
 
 const AuthScreen = () => {
   return (
@@ -22,6 +23,7 @@ const AuthScreen = () => {
                 <MasonryGrid />
                 <Companies />
                 <Mission />
+                <PricingWrapper />
                 <H2TextBlock 
                 heading="SEO Newsletter Advantages"
                 text="We strive to archive newsletters, ensuring that their stunning art and captivating photography are preserved for all to admire."
