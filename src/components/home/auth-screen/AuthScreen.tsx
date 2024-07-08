@@ -1,13 +1,10 @@
 import React from 'react'
 import HeroSection from './HeroSection';
-import { TodaysHighlight } from './TodaysHighlight';
-import { ModeToggle } from '@/components/ModeToggle';
 import RotatedText from '@/components/decorators/RotatedText';
 import MasonryGrid from './MasonryGrid';
 import Companies from './Companies';
 import Mission from '../home-screen/Mission';
 import Footer from '../Footer';
-import H2block from '@/components/h2block';
 import EmailCopy from '@/components/EmailCopy';
 import H2TextBlock from '@/components/h2block';
 
@@ -26,8 +23,12 @@ const AuthScreen = () => {
                 <Companies />
                 <Mission />
                 <H2TextBlock 
-                heading="Our Mission"
+                heading="SEO Newsletter Advantages"
                 text="We strive to archive newsletters, ensuring that their stunning art and captivating photography are preserved for all to admire."
+                />
+                <H2TextBlock 
+                heading="Design Recognition"
+                text="Stand out with your newsletter's design excellence. By being featured on our site, you enhance your brand's credibility and reputation, demonstrating your commitment to top-tier marketing practices and design standards."
                 />
                 <EmailCopy />
                 <Footer />
