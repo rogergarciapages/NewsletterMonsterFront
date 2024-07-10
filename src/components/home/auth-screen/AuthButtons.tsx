@@ -2,53 +2,43 @@
 
 "use client";
 import { Button } from '@/components/ui/button';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 const AuthButtons = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignIn = (provider: string) => {
     setLoading(true);
-    signIn('github'); // Use 'github' or 'google' as the provider
-  };
-
-  const handleLogin = () => {
-    setLoading(true);
-    signIn('github'); // Use 'github' or 'google' as the provider
-  };
-
-  const handleLogout = () => {
-    setLoading(true);
-    signOut();
+    signIn(provider);
   };
 
   return (
-    <div className='flex gap-3 flex-1 md:flex-row flex-col'>
+    <div className='flex flex-col items-center gap-3 w-full'>
       <Button
-        className='w-full bg-primary'
+        className='w-full bg-primary flex items-center justify-center'
         variant={"outline"}
         disabled={loading}
-        onClick={handleSignUp}
+        onClick={() => handleSignIn('github')}
       >
-        Sign Up
+        <img src="/icons/github.svg" alt="GitHub" className="mr-2" width="24" height="24" />
+        Log in with GitHub
       </Button>
       <Button
-        className='w-full bg-secondary'
+        className='w-full bg-primary flex items-center justify-center'
         variant={"outline"}
         disabled={loading}
-        onClick={handleLogin}
+        onClick={() => handleSignIn('google')}
       >
-        Log in
+        <img src="/icons/google.svg" alt="Google" className="mr-2" width="24" height="24" />
+        Log in with Google
       </Button>
-      <Button
-        className='w-full bg-red-500'
-        variant={"outline"}
-        disabled={loading}
-        onClick={handleLogout}
-      >
-        Log out
-      </Button>
+      <div className='mt-4 w-full'>
+        <p className='text-gray-100 text-sm font-light'> Don't have an account? <a href="/auth/signup" className="font-medium text-primary hover:underline">
+          Sign up
+        </a></p>
+        
+      </div>
     </div>
   );
 };
