@@ -1,14 +1,9 @@
-import AuthScreen from "@/components/home/auth-screen/AuthScreen";
-import HomeScreen from "@/components/home/home-screen/HomeScreen";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import Dashboard from "../../components/Dashboard";
 
-
-export default async function Home() {
-  const {getUser} = getKindeServerSession();
-  const user = await getUser();
+export default function Home() {
   return (
-    <main>
-      {user? <HomeScreen /> : <AuthScreen />}
+    <main className="max-w-8xl mx-auto my-12 space-y-5">
+      <Dashboard/>
     </main>
   );
 }

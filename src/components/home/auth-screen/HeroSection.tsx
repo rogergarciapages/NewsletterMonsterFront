@@ -1,5 +1,9 @@
+"use client";
+
 import  Image from "next/image"
 import AuthButtons from "./AuthButtons";
+import { useSession } from "next-auth/react";
+/*const { data: session } = useSession();*/
 
 const HeroSection = () => {
   return (

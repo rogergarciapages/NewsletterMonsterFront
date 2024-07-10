@@ -4,11 +4,12 @@ import RotatedText from '@/components/decorators/RotatedText';
 import MasonryGrid from './MasonryGrid';
 import Companies from './Companies';
 import Mission from '../home-screen/Mission';
-import Footer from '../Footer';
 import EmailCopy from '@/components/EmailCopy';
 import H2TextBlock from '@/components/h2block';
 import PricingWrapper from '@/components/Pricing';
+import { useSession } from 'next-auth/react';
 
+/* const { data: session } = useSession(); */
 const AuthScreen = () => {
   return (
     <div className="flex flex-col">
@@ -33,7 +34,7 @@ const AuthScreen = () => {
                 text="Stand out with your newsletter's design excellence. By being featured on our site, you enhance your brand's credibility and reputation, demonstrating your commitment to top-tier marketing practices and design standards."
                 />
                 <EmailCopy />
-                <Footer />
+
             </div>       
 
         </div>

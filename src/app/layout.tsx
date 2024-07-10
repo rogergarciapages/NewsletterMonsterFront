@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import Footer from "@/components/home/Footer";
+import SessionWrapper from "../../components/SessionWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionWrapper>
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>          
         <ThemeProvider
@@ -30,5 +32,6 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
     </html>
+    </SessionWrapper>
   );
 }
