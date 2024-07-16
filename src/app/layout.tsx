@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import Footer from "@/components/home/Footer";
 import SessionWrapper from "../../components/SessionWrapper";
+import { NavBar } from "@/components/component/nav-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,8 @@ export default function RootLayout({
   return (
     <SessionWrapper>
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>          
+      <body className={inter.className}>
+        <NavBar />          
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
