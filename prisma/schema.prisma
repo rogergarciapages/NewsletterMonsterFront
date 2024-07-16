@@ -1,0 +1,93 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  user_id       String     @id @default(uuid())
+  name          String
+  email         String     @unique
+  profile_photo String?
+  created_at    DateTime   @default(now())
+  newsletters   Newsletter[]
+  followers     Follower[] @relation("UserFollowed")
+  following     Follower[] @relation("UserFollowing")
+  likes         Like[]
+  favorites     Favorite[]
+  userTags      UserTag[]
+}
+
+model Newsletter {
+  newsletter_id       Int                  @id @default(autoincrement())
+  user_id             String
+  sender              String
+  date                DateTime
+  html_file_url       String
+  full_screenshot_url String?
+  top_screenshot_url  String?
+  likes_count         Int                  @default(0)
+  created_at          DateTime             @default(now())
+  user                User                 @relation(fields: [user_id], references: [user_id])
+  likes               Like[]
+  favorites           Favorite[]
+  newsletterTags      NewsletterTag[]
+  featuredNewsletter  FeaturedNewsletter?
+}
+
+model Follower {
+  follower_id       Int    @id @default(autoincrement())
+  user_id           String
+  following_user_id String
+  user_followed     User   @relation("UserFollowed", fields: [following_user_id], references: [user_id])
+  user_following    User   @relation("UserFollowing", fields: [user_id], references: [user_id])
+}
+
+model Tag {
+  tag_id         Int             @id @default(autoincrement())
+  name           String          @unique
+  userTags       UserTag[]
+  newsletterTags NewsletterTag[]
+}
+
+model NewsletterTag {
+  id            Int        @id @default(autoincrement())
+  newsletter_id Int
+  tag_id        Int
+  newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+  tag           Tag        @relation(fields: [tag_id], references: [tag_id])
+}
+
+model UserTag {
+  id      Int   @id @default(autoincrement())
+  user_id String
+  tag_id  Int
+  user    User  @relation(fields: [user_id], references: [user_id])
+  tag     Tag   @relation(fields: [tag_id], references: [tag_id])
+}
+
+model Like {
+  like_id       Int        @id @default(autoincrement())
+  user_id       String
+  newsletter_id Int
+  user          User       @relation(fields: [user_id], references: [user_id])
+  newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+}
+
+model Favorite {
+  favorite_id   Int        @id @default(autoincrement())
+  user_id       String
+  newsletter_id Int
+  user          User       @relation(fields: [user_id], references: [user_id])
+  newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+}
+
+model FeaturedNewsletter {
+  id            Int        @id @default(autoincrement())
+  newsletter_id Int        @unique
+  featured_at   DateTime   @default(now())
+  newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+}
