@@ -25,7 +25,7 @@ export function NavBar() {
             variant="secondary"
             className="bg-[#ffd000] text-xs text-secondary -ml-4 -rotate-6 rounded-sm select-none pointer-events-none"
           >
-            Beta v<span className="text-[9px]"> 0.65</span>
+            Beta<span className="text-[7px] pl-1">{" "}0.65</span>
           </Badge>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
