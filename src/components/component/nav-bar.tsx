@@ -7,7 +7,8 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import LogoNewsletterMonster from "@/assets/LogoNewslettermonster.svg"; // Updated path
+import LogoNewsletterMonster from "@/assets/LogoNewslettermonster.svg"; 
+import { ModeToggle } from "../ui/ModeToggle";
 
 // Define types for props
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
@@ -91,6 +92,7 @@ export function NavBar() {
               <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
                 About
               </Link>
+              <ModeToggle />
               <div className="flex items-center gap-2">
                 {session ? (
                   <>
