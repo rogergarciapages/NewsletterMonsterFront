@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 /* const { data: session } = useSession(); */
 const AuthScreen = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
         <HeroSection />
 
         <div className='mb-20 mt-12'>

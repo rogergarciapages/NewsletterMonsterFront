@@ -1,11 +1,11 @@
 "use client"
-/*import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs'*/
+
 import Link from 'next/link';
 import React from 'react'
 
 const HomeScreen = () => {
   return (
-    <div>
+    <div className='text-primary'>
         Link
     </div>
   );
