@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useRouter } from 'next/navigation';
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -12,18 +13,22 @@ import LogoNewsletterMonsterLight from "@/assets/LogoNewsletterMonsterLight.svg"
 import LogoNewsletterMonsterDark from "@/assets/LogoNewsletterMonsterDark.svg";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 
-// Define types for props
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 export function NavBar() {
   const { data: session } = useSession();
   const { theme, systemTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push('/login');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
           {currentTheme === "dark" ? (
             <LogoNewsletterMonsterDark className="z-5" />
           ) : (
@@ -37,25 +42,25 @@ export function NavBar() {
           </Badge>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+          <Link href="/" className="transition-colors hover:text-primary" prefetch={false}>
             Home
           </Link>
-          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/most-popular" className="transition-colors hover:text-primary" prefetch={false}>
             Most Popular
           </Link>
-          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/categories" className="transition-colors hover:text-primary" prefetch={false}>
             Categories
           </Link>
-          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/blog" className="transition-colors hover:text-primary" prefetch={false}>
             Blog
           </Link>
-          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/about" className="transition-colors hover=text-primary" prefetch={false}>
             About
           </Link>
           <div className="flex items-center align-middle text-primary mx-auto gap-2 border-ring md:flex-column sm:flex-column">
             {session ? (
               <>
-                <Link onClick={() => signOut()} className="text-sm font-medium" href={""}>
+                <Link onClick={() => signOut()} className="text-sm font-medium" href="">
                   Logout <span>{session.user?.name}</span>
                 </Link>
                 {session.user?.image && (
@@ -69,7 +74,7 @@ export function NavBar() {
                 )}
               </>
             ) : (
-              <Button onClick={() => signIn()} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
+              <Button onClick={handleLogin} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
                 Login
               </Button>
             )}
@@ -85,19 +90,19 @@ export function NavBar() {
           </SheetTrigger>
           <SheetContent side="left" className="sm:max-w-xs">
             <nav className="grid gap-4 px-2 py-1 text-sm font-medium">
-              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/" className="transition-colors hover:text-primary" prefetch={false}>
                 Home
               </Link>
-              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/most-popular" className="transition-colors hover=text-primary" prefetch={false}>
                 Most Popular
               </Link>
-              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/categories" className="transition-colors hover=text-primary" prefetch={false}>
                 Categories
               </Link>
-              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/blog" className="transition-colors hover=text-primary" prefetch={false}>
                 Blog
               </Link>
-              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/about" className="transition-colors hover=text-primary" prefetch={false}>
                 About
               </Link>
 
@@ -119,7 +124,7 @@ export function NavBar() {
                     </Button>
                   </>
                 ) : (
-                  <Button onClick={() => signIn()} className="text-sm font-medium">
+                  <Button onClick={handleLogin} className="text-sm font-medium">
                     Login
                   </Button>
                 )}

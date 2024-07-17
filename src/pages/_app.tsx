@@ -1,10 +1,14 @@
+// src/pages/_app.tsx
 import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </SessionProvider>
   );
 }
