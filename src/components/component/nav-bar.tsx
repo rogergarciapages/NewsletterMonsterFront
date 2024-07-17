@@ -61,7 +61,7 @@ export function NavBar() {
 
               </>
             ) : (
-              <Button onClick={() => signIn()} className="text-sm font-medium">
+              <Button onClick={() => signIn()} className="text-xs pt-1 pb-1 m-0 h-3 font-medium hover:bg-[#ccc]">
                 Login
               </Button>
             )}
