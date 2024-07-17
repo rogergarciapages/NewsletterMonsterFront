@@ -21,14 +21,15 @@ export default function RootLayout({
   return (
     <SessionWrapper>
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <NavBar />          
+      <body className={inter.className}>        
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
+        <NavBar />          
+
             {children}
             <Footer />
           </ThemeProvider>
