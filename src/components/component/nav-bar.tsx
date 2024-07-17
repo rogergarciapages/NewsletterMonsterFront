@@ -67,6 +67,7 @@ export function NavBar() {
               </Button>
             )}
           </div>
+          <ModeToggle />
         </nav>
         <Sheet>
           <SheetTrigger asChild>
@@ -76,7 +77,7 @@ export function NavBar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="sm:max-w-xs">
-            <nav className="grid gap-4 px-4 py-6 text-sm font-medium">
+            <nav className="grid gap-4 px-4 py-1 text-sm font-medium">
               <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
                 Home
               </Link>
@@ -92,7 +93,7 @@ export function NavBar() {
               <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
                 About
               </Link>
-              <ModeToggle />
+
               <div className="flex items-center gap-2">
                 {session ? (
                   <>
