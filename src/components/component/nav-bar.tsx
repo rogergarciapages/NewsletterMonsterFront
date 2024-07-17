@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import LogoNewsletterMonster from "@/assets/LogoNewslettermonster.svg"; 
+import LogoNewsletterMonsterLight from "@/assets/LogoNewsletterMonsterLight.svg";
+import LogoNewsletterMonsterDark from "@/assets/LogoNewsletterMonsterDark.svg";
 import { ModeToggle } from "../ui/ModeToggle";
 
 // Define types for props
@@ -15,12 +17,18 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 export function NavBar() {
   const { data: session } = useSession();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <LogoNewsletterMonster className="z-5" />
+          {currentTheme === "dark" ? (
+            <LogoNewsletterMonsterDark className="z-5" />
+          ) : (
+            <LogoNewsletterMonsterLight className="z-5" />
+          )}
           <Badge
             variant="secondary"
             className="bg-[#ffd000] text-xs text-secondary -ml-4 -rotate-6 rounded-sm select-none pointer-events-none"
@@ -47,7 +55,7 @@ export function NavBar() {
           <div className="flex items-center align-middle text-primary mx-auto gap-2 border-ring md:flex-column sm:flex-column">
             {session ? (
               <>
-                  <Link onClick={() => signOut()} className="text-sm font-medium" href={""}>
+                <Link onClick={() => signOut()} className="text-sm font-medium" href={""}>
                   Logout <span>{session.user?.name}</span>
                 </Link>
                 {session.user?.image && (
@@ -59,7 +67,6 @@ export function NavBar() {
                     className="rounded-full"
                   />
                 )}
-
               </>
             ) : (
               <Button onClick={() => signIn()} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
