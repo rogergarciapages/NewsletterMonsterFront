@@ -5,6 +5,7 @@ import { getProviders, signIn, ClientSafeProvider, LiteralUnion } from 'next-aut
 import { BuiltInProviderType } from 'next-auth/providers';
 import { useEffect, useState } from 'react';
 import { NavBar } from '@/components/Navbar';
+import AuthButtons from '@/components/home/auth-screen/AuthButtons';
 
 const Login = () => {
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
@@ -18,16 +19,15 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-        <NavBar />
-      <h1 className="text-2xl mb-6">Sign In</h1>
-      {providers && Object.values(providers).map((provider) => (
-        <div key={provider.name} className="mb-4">
-          <button onClick={() => signIn(provider.id)} className="btn btn-primary">
-            Sign in with {provider.name}
-          </button>
+    <div className="min-h-screen flex flex-col">
+      <NavBar /> {/* Keep the Navbar at the top */}
+      <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl mb-6">Sign In</h1>
+          <AuthButtons  />
+
         </div>
-      ))}
+      </div>
     </div>
   );
 };
