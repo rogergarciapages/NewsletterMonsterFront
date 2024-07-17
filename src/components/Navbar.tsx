@@ -1,52 +1,80 @@
+"use client";
+
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import LogoNewsletterMonsterLight from "@/assets/LogoNewsletterMonsterLight.svg";
+import LogoNewsletterMonsterDark from "@/assets/LogoNewsletterMonsterDark.svg";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 
 // Define types for props
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 export function NavBar() {
+  const { data: session } = useSession();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <Image src="/LogoNewslettermonster.svg" alt="Logo" width={24} height={24} className="h-6 w-6" />
+          {currentTheme === "dark" ? (
+            <LogoNewsletterMonsterDark className="z-5" />
+          ) : (
+            <LogoNewsletterMonsterLight className="z-5" />
+          )}
           <Badge
             variant="secondary"
             className="bg-[#ffd000] text-xs text-secondary -ml-4 -rotate-6 rounded-sm select-none pointer-events-none"
           >
-            Beta v<span className="text-[9px]"> 0.65</span>
+            Beta<span className="text-[7px] pl-1">{" "}0.65</span>
           </Badge>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
             Home
           </Link>
-          <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
             Most Popular
           </Link>
-          <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
             Categories
           </Link>
-          <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
             Blog
           </Link>
-          <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+          <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
             About
           </Link>
-          <div className="flex items-center gap-2">
-            <Link
-              href="#"
-              className="inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-[#ccc] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              prefetch={false}
-            >
-              Login
-            </Link>
+          <div className="flex items-center align-middle text-primary mx-auto gap-2 border-ring md:flex-column sm:flex-column">
+            {session ? (
+              <>
+                <Link onClick={() => signOut()} className="text-sm font-medium" href={""}>
+                  Logout <span>{session.user?.name}</span>
+                </Link>
+                {session.user?.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="Profile Picture"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                )}
+              </>
+            ) : (
+              <Button onClick={() => signIn()} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
+                Login
+              </Button>
+            )}
           </div>
+          <ModeToggle />
         </nav>
         <Sheet>
           <SheetTrigger asChild>
@@ -56,31 +84,45 @@ export function NavBar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="sm:max-w-xs">
-            <nav className="grid gap-4 px-4 py-6 text-sm font-medium">
-              <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+            <nav className="grid gap-4 px-2 py-1 text-sm font-medium">
+              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
                 Home
               </Link>
-              <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
                 Most Popular
               </Link>
-              <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
                 Categories
               </Link>
-              <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
                 Blog
               </Link>
-              <Link href="#" className="transition-colors hover:text-primary" prefetch={false}>
+              <Link href="#" className="transition-colors hover=text-primary" prefetch={false}>
                 About
-              </Link><ModeToggle />
+              </Link>
+
               <div className="flex items-center gap-2">
-                <Link
-                  href="#"
-                  className="inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
-                  Login
-                </Link>
-                
+                {session ? (
+                  <>
+                    <span>Welcome {session.user?.name}</span>
+                    {session.user?.image && (
+                      <Image
+                        src={session.user.image}
+                        alt="Profile Picture"
+                        width={30}
+                        height={30}
+                        className="rounded-full"
+                      />
+                    )}
+                    <Button onClick={() => signOut()} className="text-sm font-medium">
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <Button onClick={() => signIn()} className="text-sm font-medium">
+                    Login
+                  </Button>
+                )}
               </div>
             </nav>
           </SheetContent>
@@ -100,7 +142,7 @@ function MenuIcon(props: IconProps) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="0"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -121,7 +163,7 @@ function XIcon(props: IconProps) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="0"
       strokeLinecap="round"
       strokeLinejoin="round"
     >

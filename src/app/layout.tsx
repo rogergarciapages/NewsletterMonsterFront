@@ -1,40 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import Footer from "@/components/home/Footer";
-import SessionWrapper from "../../components/SessionWrapper";
-import { NavBar } from "@/components/component/nav-bar";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "NewsletterMonster.com",
-  description: "The internet's newsletter archive.",
-};
+import '../styles/globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import SessionWrapper from '@/components/SessionWrapper';
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode,
+}) {
   return (
-    <SessionWrapper>
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>        
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        <NavBar />          
-
+    <html lang="en">
+      <body>
+        <ThemeProvider>
+          <SessionWrapper>
             {children}
-            <Footer />
-          </ThemeProvider>
-        </body>
+          </SessionWrapper>
+        </ThemeProvider>
+      </body>
     </html>
-    </SessionWrapper>
   );
 }

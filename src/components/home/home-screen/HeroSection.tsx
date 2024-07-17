@@ -1,7 +1,7 @@
 "use client";
 
 import  Image from "next/image"
-import AuthButtons from "./AuthButtons";
+import AuthButtons from "../auth-screen/AuthButtons";
 import { useSession } from "next-auth/react";
 /*const { data: session } = useSession();*/
 

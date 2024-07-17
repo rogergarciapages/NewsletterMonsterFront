@@ -1,44 +1,41 @@
-import React from 'react'
-import HeroSection from './HeroSection';
-import RotatedText from '@/components/decorators/RotatedText';
-import MasonryGrid from './MasonryGrid';
-import Companies from './Companies';
-import Mission from '../home-screen/Mission';
-import EmailCopy from '@/components/EmailCopy';
-import H2TextBlock from '@/components/h2block';
-import PricingWrapper from '@/components/Pricing';
-import { useSession } from 'next-auth/react';
+// C:\Users\Usuario\Documents\GitHub\nm3\src\components\home\auth-screen\AuthScreen.tsx
 
-/* const { data: session } = useSession(); */
+import React from 'react';
+import { signIn } from 'next-auth/react';
+import { FaGoogle, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
 const AuthScreen = () => {
   return (
-    <div className="flex w-full flex-col">
-        <HeroSection />
-
-        <div className='mb-20 mt-12'>
-            <div className='max-w-6xl mx-auto px-4'>
-                <p className='text-3xl md:text-5xl tracking-tight mt-4 mb-8 font-semibold text-center'>
-                    Today's <RotatedText> Top Newsletters </RotatedText>
-                </p> 
-                
-                <MasonryGrid />
-                <Companies />
-                <Mission />
-                <PricingWrapper />
-                <H2TextBlock 
-                heading="SEO Newsletter Advantages"
-                text="We strive to archive newsletters, ensuring that their stunning art and captivating photography are preserved for all to admire."
-                />
-                <H2TextBlock 
-                heading="Design Recognition"
-                text="Stand out with your newsletter's design excellence. By being featured on our site, you enhance your brand's credibility and reputation, demonstrating your commitment to top-tier marketing practices and design standards."
-                />
-                <EmailCopy />
-
-            </div>       
-
-        </div>
-
+    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <h1 className="text-4xl font-bold mb-8">Sign In</h1>
+      <button
+        onClick={() => signIn('google')}
+        className="flex items-center mb-4 px-4 py-2 bg-red-500 text-white rounded"
+      >
+        <FaGoogle className="mr-2" />
+        Sign in with Google
+      </button>
+      <button
+        onClick={() => signIn('github')}
+        className="flex items-center mb-4 px-4 py-2 bg-gray-800 text-white rounded"
+      >
+        <FaGithub className="mr-2" />
+        Sign in with GitHub
+      </button>
+      <button
+        onClick={() => signIn('linkedin')}
+        className="flex items-center mb-4 px-4 py-2 bg-blue-700 text-white rounded"
+      >
+        <FaLinkedin className="mr-2" />
+        Sign in with LinkedIn
+      </button>
+      <button
+        onClick={() => signIn('email')}
+        className="flex items-center mb-4 px-4 py-2 bg-gray-400 text-black rounded"
+      >
+        <FaEnvelope className="mr-2" />
+        Sign in with Email
+      </button>
     </div>
   );
 };

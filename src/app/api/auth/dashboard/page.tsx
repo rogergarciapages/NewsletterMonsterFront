@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavBar } from '@/components/Navbar';
-import HomeScreen from '@/components/home/home-screen/HomeScreen';
+import DashboardContent from '@/components/dashboard/DashboardContent';
 
-const HomePage = () => {
+const DashboardPage = () => {
   return (
     <main className="max-w-8xl mx-auto my-1 space-y-5">
       <NavBar />
-      <HomeScreen />
+      <DashboardContent />
     </main>
   );
 };
 
-export default HomePage;
+export default DashboardPage;
