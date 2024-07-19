@@ -79,8 +79,8 @@ export function DashboardUserFeed() {
         </div>
       </div>
       <div className="flex-1 dark:bg-[#222] p-6">
-        <div className="grid gap-6">
-          <div className="flex items-center justify-between">
+        <div className="grid gap-6 dark:bg-[#222]">
+          <div className="flex items-center justify-between dark:bg-[#222]">
             <h2 className="text-2xl font-bold">Home</h2>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon">
@@ -92,8 +92,8 @@ export function DashboardUserFeed() {
             </div>
           </div>
           <div className="grid gap-4">
-            <Card>
-              <CardHeader className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+            <Card className="dark:bg-[#222]">
+              <CardHeader className="flex flex-col items-start gap-2  sm:flex-row sm:items-center">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src="/placeholder-user.jpg" />
