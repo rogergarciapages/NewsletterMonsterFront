@@ -7,7 +7,7 @@ const AuthButtons = () => {
 
   const handleSignIn = (provider: string) => {
     setLoading(true);
-    signIn(provider);
+    signIn(provider, { callbackUrl: '/dashboard' });
   };
 
   return (
