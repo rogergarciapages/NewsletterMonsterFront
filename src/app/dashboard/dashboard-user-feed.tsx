@@ -133,7 +133,7 @@ export function DashboardUserFeed() {
           </nav>
         </div>
       </div>
-      <div className="flex-1 dark:bg-[#222] p-6">
+      <div className="flex-1 dark:bg-[#222] p-6 space-y-5">
         <div className="grid gap-6 dark:bg-[#222]">
           <div className="flex items-center justify-between dark:bg-[#222]">
             <h2 className="text-2xl font-bold">Home</h2>
