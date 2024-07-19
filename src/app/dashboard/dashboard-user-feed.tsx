@@ -109,16 +109,16 @@ export function DashboardUserFeed() {
                   <HeartIcon className="h-5 w-5" />
                 </Button>
                 <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  ref={buttonRef}
-                  onClick={handleButtonClick}
-                  title="Rock Yeah!"
-                  className="transition-transform-all duration-200 ease-in-out hover:bg-primary hover:scale-110" // Add hover classes
-                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                  onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
-  >
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    ref={buttonRef}
+                    onClick={handleButtonClick}
+                    title="Rock Yeah!"
+                    className="transition-transform-all duration-200 ease-in-out hover:bg-primary hover:scale-110" // Add hover classes
+                    onMouseDown={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+                    onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                  >
                     <HandMetal className="h-5 w-5 hover:text-white" />
                   </Button>
                   {showModal && (
