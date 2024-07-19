@@ -29,8 +29,8 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --font-inter: 'Inter', sans-serif; /* Add this line */
-    --icon-color: #000000; /* Default icon color */
+    --font-inter: 'Inter', sans-serif;
+    --icon-color: #ffffff;
   }
 
   .dark {
@@ -58,18 +58,51 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --icon-color: #ffffff; /* Dark mode icon color */
+    --icon-color: #ffffff;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground font-sans; /* Use the Inter font */
+    @apply bg-background text-foreground font-sans;
   }
+
   .icon {
-    filter: invert(var(--icon-color));
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  }
+
+  .logo-container {
+    position: relative;
+    width: 260px;  /* Fixed width to prevent shifting */
+    height: 56px;  /* Fixed height to prevent shifting */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensure overflow is hidden to avoid content overflow */
+  }
+
+  .fade-in-out {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 1.5s; /* Adjust timings as needed */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 }

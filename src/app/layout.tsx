@@ -8,13 +8,13 @@ import { ReactNode } from 'react';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <head />
-      <body className="font-sans">
+      <body className="min-h-screen flex flex-col">
         <SessionWrapper>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <div className="min-h-screen flex flex-col">
-              <main className="flex-grow">{children}</main>
+            <div className="flex-grow w-full">
+              <main>{children}</main>
               <Footer /> {/* Include the Footer component */}
             </div>
           </ThemeProvider>

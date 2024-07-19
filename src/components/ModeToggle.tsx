@@ -1,4 +1,3 @@
-// src/components/ModeToggle.tsx
 "use client";
 
 import { useTheme } from "next-themes";
@@ -18,10 +17,10 @@ export function ModeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md bg-gray-200 dark:bg-gray-800"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
     >
-      {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
     </button>
   );
 }
