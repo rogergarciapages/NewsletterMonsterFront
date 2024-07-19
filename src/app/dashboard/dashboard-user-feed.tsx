@@ -27,41 +27,35 @@ import {
   XIcon,
   TrendingUpIcon,
 } from "../dashboard/icons";
-import Confetti from "react-confetti";
+import confetti from "canvas-confetti";
 import { UsersIcon } from "lucide-react";
 
 export function DashboardUserFeed() {
   const [counter, setCounter] = useState(0);
-  const [confetti, setConfetti] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const confettiRef = useRef<HTMLDivElement>(null);
-  const [confettiDimensions, setConfettiDimensions] = useState({
-    width: 80,
-    height: 80,
-  });
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (confettiRef.current) {
-      const { width, height } = confettiRef.current.getBoundingClientRect();
-      setConfettiDimensions({ width, height });
-    }
-  }, [confettiRef]);
+  const runConfetti = () => {
+    if (!buttonRef.current) return;
+
+    const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
+
+    confetti({
+      particleCount: 50,
+      startVelocity: 30,
+      spread: 45,
+      origin: { x: x / window.innerWidth, y: y / window.innerHeight },
+      scalar: 0.5, // Adjust this to make particles smaller
+    });
+  };
 
   const handleButtonClick = () => {
     setCounter((prevCounter) => prevCounter + 1);
+    runConfetti();
+    setShowModal(true);
 
-    // Reset state to ensure the confetti and modal are triggered reliably
-    setConfetti(false);
-    setShowModal(false);
-
-    requestAnimationFrame(() => {
-      setConfetti(true);
-      setShowModal(true);
-    });
-
-    setTimeout(() => {
-      setConfetti(false);
-    }, 1000); // Confetti effect duration (1 second)
     setTimeout(() => {
       setShowModal(false);
     }, 1500); // Modal display duration (1.5 seconds)
@@ -212,6 +206,7 @@ export function DashboardUserFeed() {
                   <Button
                     variant="ghost"
                     size="icon"
+                    ref={buttonRef}
                     onClick={handleButtonClick}
                     title="Rock Yeah!"
                     style={{ transition: "transform 0.2s ease-in-out" }}
@@ -254,40 +249,6 @@ export function DashboardUserFeed() {
                         }}
                       />
                       <p className="text-[8px]">You rock it!</p>
-                    </div>
-                  )}
-                  {confetti && (
-                    <div
-                      className="absolute"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        top: "-30px",
-                        left: "-30px",
-                        pointerEvents: "none", 
-                      }}
-                      ref={confettiRef}
-                    >
-                      <Confetti
-                        width={confettiDimensions.width}
-                        height={confettiDimensions.height}
-                        recycle={false}
-                        numberOfPieces={50}
-                        gravity={0.4}
-                        initialVelocityY={7}
-                        confettiSource={{
-                          x: confettiDimensions.width / 2,
-                          y: confettiDimensions.height / 2,
-                          w: 10,
-                          h: 10,
-                        }}
-                        colors={["#ff0f7b", "#f89b29", "#00f9ff"]}
-                        drawShape={(ctx) => {
-                          ctx.beginPath();
-                          ctx.arc(0, 0, 2, 0, 2 * Math.PI);
-                          ctx.fill();
-                        }}
-                      />
                     </div>
                   )}
                 </div>
