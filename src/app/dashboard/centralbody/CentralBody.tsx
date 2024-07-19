@@ -52,7 +52,7 @@ export function CentralBody() {
           <Card className="dark:bg-[#222] dark:border-[#ccc]">
             <CardHeader className="flex flex-col items-start  gap-2 sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
-                <Avatar className="h-10 w-10">
+                <Avatar className="h-20 w-20">
                   <AvatarImage src="/placeholder-user.jpg" />
                   <AvatarFallback>JP</AvatarFallback>
                 </Avatar>
