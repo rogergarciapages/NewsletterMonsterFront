@@ -78,7 +78,7 @@ export function DashboardUserFeed() {
           
         </div>
       </div>
-      <div className="flex-1   dark:bg-[#222] p-6">
+      <div className="flex-1 dark:bg-[#222] p-6">
         <div className="grid gap-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Home</h2>
@@ -208,7 +208,7 @@ export function DashboardUserFeed() {
                   <div className="font-medium">Sarah Johnson</div>
                   <div className="text-sm text-muted-foreground">@sarahjohnson</div>
                 </div>
-                <Button variant="ghost" size="icon" className="ml-auto">
+                <Button variant="ghost" size="icon" className="ml-auto hover:bg-primary">
                   <PlusIcon className="h-5 w-5" />
                 </Button>
               </div>
@@ -221,7 +221,7 @@ export function DashboardUserFeed() {
                   <div className="font-medium">Michael Brown</div>
                   <div className="text-sm text-muted-foreground">@michaelbrown</div>
                 </div>
-                <Button variant="ghost" size="icon" className="ml-auto">
+                <Button variant="ghost" size="icon" className="ml-auto hover:bg-primary">
                   <PlusIcon className="h-5 w-5" />
                 </Button>
               </div>
@@ -234,7 +234,7 @@ export function DashboardUserFeed() {
                   <div className="font-medium">Emily Davis</div>
                   <div className="text-sm text-muted-foreground">@emilydavis</div>
                 </div>
-                <Button variant="ghost" size="icon" className="ml-auto">
+                <Button variant="ghost" size="icon" className="ml-auto hover:bg-primary">
                   <PlusIcon className="h-5 w-5" />
                 </Button>
               </div>
@@ -246,7 +246,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #coding
@@ -256,7 +256,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #foodie
@@ -266,7 +266,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #travel
@@ -281,7 +281,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #coding
@@ -290,7 +290,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #webdev
@@ -299,7 +299,7 @@ export function DashboardUserFeed() {
               <div className="flex items-center gap-2">
                 <Link
                   href="#"
-                  className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground"
+                  className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground"
                   prefetch={false}
                 >
                   #react

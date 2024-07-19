@@ -7,8 +7,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export default function Component() {
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <div className="hidden w-1/5 border-r bg-muted/40 p-6 lg:block">
+    <div className="flex min-h-screen w-full bg-[#222]">
+      <div className="hidden w-1/5 border-r bg-[#222] p-6 lg:block">
         <div className="flex flex-col gap-6">
           <div className="flex items-start gap-2">
             <img src="/placeholder.svg" width={250} height={65} alt="Logo" className="mb-2" />
@@ -86,7 +86,7 @@ export default function Component() {
           <Button className="w-full">Tweet</Button>
         </div>
       </div>
-      <div className="flex-1 border-r border-l bg-muted/40 p-6">
+      <div className="flex-1 border-r border-l bg-[#222] p-6">
         <div className="grid gap-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Home</h2>
@@ -191,7 +191,7 @@ export default function Component() {
           </div>
         </div>
       </div>
-      <div className="hidden w-1/5 bg-muted/40 p-6 lg:block">
+      <div className="hidden w-1/5 bg-[#222] p-6 lg:block">
         <div className="grid gap-6">
           <div>
             <h3 className="text-lg font-bold">Who to follow</h3>
@@ -241,15 +241,15 @@ export default function Component() {
             <h3 className="text-lg font-bold">Trends for you</h3>
             <div className="mt-4 grid gap-4">
               <div className="flex items-center gap-2">
-                <div className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground">#coding</div>
+                <div className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground">#coding</div>
                 <div className="text-sm text-muted-foreground">Trending in Technology</div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground">#foodie</div>
+                <div className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground">#foodie</div>
                 <div className="text-sm text-muted-foreground">Trending in Lifestyle</div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="rounded-md bg-accent px-2 py-1 text-sm text-accent-foreground">#travel</div>
+                <div className="rounded-md bg-primary px-2 py-1 text-sm text-accent-foreground">#travel</div>
                 <div className="text-sm text-muted-foreground">Trending in Travel</div>
               </div>
             </div>
