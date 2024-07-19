@@ -1,7 +1,5 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { HeroLanding } from "./hero-landing";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const images = [
   "/featured/slider/image1.webp",
@@ -21,22 +19,26 @@ const images = [
   "/featured/slider/image15.webp",
 ];
 
-const HeroSection = () => {
+const ImageSlider = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 500); 
+    }, 500); // Change image every 500ms (0.5 seconds)
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className='flex h-screen w-full'>
-      <HeroLanding currentImageIndex={currentImageIndex} images={images} />
-    </div>
+    <Image
+      src={images[currentImageIndex]}
+      alt={"The internet newsletter archive app"}
+      fill
+      priority
+      className="object-cover opacity-90 pointer-events-none select-none height-full object-top transition-opacity duration-500 -z-100"
+    />
   );
 };
 
-export default HeroSection;
+export default ImageSlider;
