@@ -6,13 +6,13 @@ import { UsersIcon } from "lucide-react"
 
 export function DashboardUserFeed() {
   return (
-    <div className="flex min-h-screen w-full bg-[#222]">
-      <div className="hidden w-1/5  bg-[#222] p-6 lg:block">
+    <div className="flex min-h-screen w-full dark:bg-[#222]">
+      <div className="hidden w-1/5 dark:bg-[#222] p-6 lg:block">
         <div className="flex flex-col gap-6">
           <nav className="grid gap-2">
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <HomeIcon className="h-5 w-5" />
@@ -20,7 +20,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <TrendingUpIcon className="h-5 w-5" />
@@ -28,7 +28,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <MailsIcon className="h-5 w-5" />
@@ -36,7 +36,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <MessagesSquareIcon className="h-5 w-5" />
@@ -44,7 +44,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <BookmarkIcon className="h-5 w-5" />
@@ -52,7 +52,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <ListIcon className="h-5 w-5" />
@@ -60,7 +60,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <UsersIcon className="h-5 w-5" />
@@ -68,7 +68,7 @@ export function DashboardUserFeed() {
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
               prefetch={false}
             >
               <ExpandIcon className="h-5 w-5" />
@@ -78,7 +78,7 @@ export function DashboardUserFeed() {
           
         </div>
       </div>
-      <div className="flex-1   bg-[#222] p-6">
+      <div className="flex-1   dark:bg-[#222] p-6">
         <div className="grid gap-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Home</h2>
@@ -194,7 +194,7 @@ export function DashboardUserFeed() {
           </div>
         </div>
       </div>
-      <div className="hidden w-1/5 bg-[#222] p-6 lg:block">
+      <div className="hidden w-1/5 dark:bg-[#222] p-6 lg:block">
         <div className="grid gap-6">
           <div>
             <h3 className="text-lg font-bold">Who to follow</h3>
