@@ -49,14 +49,22 @@ export function DashboardUserFeed() {
 
   const handleButtonClick = () => {
     setCounter((prevCounter) => prevCounter + 1);
-    setConfetti(true);
-    setShowModal(true);
+
+    // Reset state to ensure the confetti and modal are triggered reliably
+    setConfetti(false);
+    setShowModal(false);
+
+    requestAnimationFrame(() => {
+      setConfetti(true);
+      setShowModal(true);
+    });
+
     setTimeout(() => {
       setConfetti(false);
-    }, 2000); // Confetti effect duration
+    }, 1000); // Confetti effect duration (1 second)
     setTimeout(() => {
       setShowModal(false);
-    }, 3000); // Modal display duration
+    }, 1500); // Modal display duration (1.5 seconds)
   };
 
   return (
