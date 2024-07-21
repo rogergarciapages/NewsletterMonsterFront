@@ -3,7 +3,7 @@ import React from 'react'
 const Mission = () => {
   return (
   <div className="mb-8 md:mx-auto md:mb-24 text-center max-w-4xl"  >
-    <p className="text-base text-secondary dark:text-primary font-bold tracking-wide uppercase">
+    <p className="text-base text-primary dark:text-primary font-bold tracking-wide uppercase">
     The Mission
     </p>
         <h2 className="font-bold leading-tighter tracking-tighter font-heading text-heading text-3xl md:text-4xl" >
