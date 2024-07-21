@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HomeIcon, TrendingUpIcon, MailsIcon, MessagesSquareIcon, BookmarkIcon, ListIcon, UsersIcon, ExpandIcon } from "lucide-react";
+import styles from '../dashboard.module.css';  // Import the CSS module
 
 const LeftSidebar = () => {
   return (
@@ -8,7 +9,7 @@ const LeftSidebar = () => {
         <nav className="grid gap-2">
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <HomeIcon className="h-5 w-5" />
@@ -16,7 +17,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <TrendingUpIcon className="h-5 w-5" />
@@ -24,7 +25,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <MailsIcon className="h-5 w-5" />
@@ -32,7 +33,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <MessagesSquareIcon className="h-5 w-5" />
@@ -40,7 +41,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <BookmarkIcon className="h-5 w-5" />
@@ -48,7 +49,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <ListIcon className="h-5 w-5" />
@@ -56,7 +57,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <UsersIcon className="h-5 w-5" />
@@ -64,7 +65,7 @@ const LeftSidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff]"
+            className={`flex items-center gap-2 rounded-md transition-all duration-500 ease-in-out px-3 py-2 text-[#222] dark:text-white hover:bg-primary hover:text-[#ffffff] ${styles.halftone}`}
             prefetch={false}
           >
             <ExpandIcon className="h-5 w-5" />
