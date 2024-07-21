@@ -1,3 +1,5 @@
+/* globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +32,9 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --font-inter: 'Inter', sans-serif;
-    --icon-color: #ffffff;
+    --icon-color: #000000; /* Dark icon color for light theme */
+    --halftone-color: white; /* Light dots for light theme */
+    --halftone-mask: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1) 100%);
   }
 
   .dark {
@@ -58,7 +62,9 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --icon-color: #ffffff;
+    --icon-color: #ffffff; /* Light icon color for dark theme */
+    --halftone-color: black; /* Dark dots for dark theme */
+    --halftone-mask: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%);
   }
 
   * {

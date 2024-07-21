@@ -49,37 +49,22 @@ export function CentralBody() {
       <div className="grid gap-6 dark:bg-[#222]">
 
         <div className="grid gap-4">
-          <Card className="dark:bg-[#222] dark:border-[#ccc]">
+          <Card className="dark:bg-[#222] dark:border-[#494949]">
             <CardHeader className="flex flex-col items-start  gap-2 sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
-                <Avatar className="h-20 w-20">
+                <Avatar className="h-10 w-10">
                   <AvatarImage src="/placeholder-user.jpg" />
                   <AvatarFallback>JP</AvatarFallback>
                 </Avatar>
                 <div>
-                  <div className="font-medium">John Doe</div>
-                  <div className="text-sm text-muted-foreground">
-                    @johndoe
+                    <div className="font-medium">John Doe</div>
+                    <div className="text-sm text-muted-foreground">
+                    <p>@johndoe</p>
+
                   </div>
                 </div>
               </div>
-              <div className="grid gap-2 text-left sm:ml-auto">
-                <div className="text-sm text-muted-foreground">Oct 8, 2023</div>
-                <div className="text-sm text-muted-foreground">Project Update</div>
-                <div className="text-sm text-muted-foreground">Acme Inc</div>
-                <div className="flex items-center gap-2">
-                  <Link
-                    href="#"
-                    className="text-sm text-primary underline"
-                    prefetch={false}
-                  >
-                    View Project
-                  </Link>
-                  <Button variant="ghost" size="sm" className="text-sm">
-                    Download HTML
-                  </Button>
-                </div>
-              </div>
+
             </CardHeader>
             <CardContent>
               <p>

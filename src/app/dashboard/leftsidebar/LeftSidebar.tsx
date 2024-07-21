@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { HomeIcon, TrendingUpIcon, MailsIcon, MessagesSquareIcon, BookmarkIcon, ListIcon, UsersIcon, ExpandIcon } from "lucide-react";
 import styles from '../dashboard.module.css';  // Import the CSS module
+import { useTheme } from 'next-themes';  // or the theme provider you are using
 
 const LeftSidebar = () => {
+  const { theme } = useTheme();
+  const resolvedTheme = theme || 'light';
+
   return (
     <div className="hidden lg:block w-1/5 p-6 dark:bg-[#222]">
       <div className="sticky top-[64px] flex flex-col gap-6">
