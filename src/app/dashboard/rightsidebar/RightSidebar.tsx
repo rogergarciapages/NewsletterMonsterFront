@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 const RightSidebar = () => {
   return (
-    <div className="hidden lg:block w-1/5 p-6 dark:bg-[#222]">
+    <div className="w-full lg:w-1/5 p-6 dark:bg-[#222]">
       <div className="sticky top-[64px] grid gap-6"> {/* Adjust top value */}
         <div>
           <h3 className="text-lg font-bold">Who to follow</h3>
@@ -111,7 +111,7 @@ const RightSidebar = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-bold">Trending Tags</h3>
+          <h3 className="text-lg font-bold">Tags</h3>
           <div className="mt-4 grid gap-4">
             <div className="flex items-center gap-2">
               <Link
