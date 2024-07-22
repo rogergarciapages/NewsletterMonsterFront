@@ -3,30 +3,30 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'; // Import useRouter for use in Next.js 13+ App Router
+import { useRouter } from 'next/navigation';
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/Logo"; // Import the Logo component
+import { Logo } from "@/components/Logo";
 import { ModeToggle } from "@/components/ui/ModeToggle";
-import { UserDropdownMenu } from "@/components/ui/user-dropdown-menu"; // Import UserDropdownMenu
+import { UserDropdownMenu } from "@/components/ui/user-dropdown-menu";
+import { UserOptionsMenu } from "@/components/ui/UserOptionsMenu"; 
 
-// Define types for props
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 export function NavBar() {
   const { data: session } = useSession();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
 
   const handleLogin = () => {
-    router.push('/login'); // Navigate to the login page
+    router.push('/login');
   };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <Logo /> 
+          <Logo />
           <Badge
             variant="secondary"
             className="bg-[#ffd000] text-xs text-[#222] -ml-4 -rotate-6 rounded-sm select-none pointer-events-none"
@@ -41,25 +41,25 @@ export function NavBar() {
           <Link href="/most-popular" className="transition-colors hover:text-primary" prefetch={false}>
             Most Popular
           </Link>
-          <Link href="/categories" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/categories" className="transition-colors hover:text-primary" prefetch={false}>
             Categories
           </Link>
-          <Link href="/blog" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/blog" className="transition-colors hover:text-primary" prefetch={false}>
             Blog
           </Link>
-          <Link href="/about" className="transition-colors hover=text-primary" prefetch={false}>
+          <Link href="/about" className="transition-colors hover:text-primary" prefetch={false}>
             About
           </Link>
           <div className="flex items-center align-middle text-primary mx-auto gap-2 border-ring md:flex-column sm:flex-column">
             {session ? (
-              <UserDropdownMenu /> // Use UserDropdownMenu component
+              <UserDropdownMenu />
             ) : (
               <Button onClick={handleLogin} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
                 Login
               </Button>
             )}
           </div>
-          <ModeToggle />
+          <ModeToggle /> {/* Retain ModeToggle for desktop */}
         </nav>
         <Sheet>
           <SheetTrigger asChild>
@@ -73,28 +73,19 @@ export function NavBar() {
               <Link href="/" className="transition-colors hover:text-primary" prefetch={false}>
                 Home
               </Link>
-              <Link href="/most-popular" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/most-popular" className="transition-colors hover:text-primary" prefetch={false}>
                 Most Popular
               </Link>
-              <Link href="/categories" className="transition-colors hover-text-primary" prefetch={false}>
+              <Link href="/categories" className="transition-colors hover:text-primary" prefetch={false}>
                 Categories
               </Link>
-              <Link href="/blog" className="transition-colors hover=text-primary" prefetch={false}>
+              <Link href="/blog" className="transition-colors hover:text-primary" prefetch={false}>
                 Blog
               </Link>
-              <Link href="/about" className="transition-colors hover-text-primary" prefetch={false}>
+              <Link href="/about" className="transition-colors hover:text-primary" prefetch={false}>
                 About
               </Link>
-
-              <div className="flex items-center gap-2">
-                {session ? (
-                  <UserDropdownMenu /> // Use UserDropdownMenu component
-                ) : (
-                  <Button onClick={handleLogin} className="text-sm font-medium">
-                    Login
-                  </Button>
-                )}
-              </div>
+              <UserOptionsMenu /> {/* Include UserOptionsMenu for mobile */}
             </nav>
           </SheetContent>
         </Sheet>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { HomeIcon, SettingsIcon, LogOutIcon, UserIcon } from "lucide-react"; 
 
 export function UserOptionsMenu() {
   const { data: session } = useSession();
@@ -22,8 +23,7 @@ export function UserOptionsMenu() {
   };
 
   const handleLogout = () => {
-    // Add your logout logic here, for example:
-    // signOut();
+
   };
 
   if (!mounted) {
@@ -32,17 +32,36 @@ export function UserOptionsMenu() {
 
   return (
     <div className="flex flex-col gap-2">
-      {session ? (
+      {session && session.user ? (
         <>
-          <Link href="/dashboard" className="transition-colors hover:text-primary" prefetch={false}>
+          <div className="flex items-center gap-2">
+            {session.user.image ? (
+              <img
+                src={session.user.image}
+                alt="User Image"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <UserIcon className="w-8 h-8" />
+            )}
+            <span>{session.user.name}</span>
+          </div>
+          <Link href="/dashboard" className="flex items-center gap-2 transition-colors hover:text-primary" prefetch={false}>
+            <HomeIcon className="w-5 h-7" />
             Dashboard
           </Link>
-          <Button onClick={handleLogout} className="text-sm font-medium">
+          <Link href="/settings" className="flex items-center gap-2 transition-colors hover:text-primary" prefetch={false}>
+            <SettingsIcon className="w-5 h-7" />
+            Settings
+          </Link>
+          <Button onClick={handleLogout} className="flex items-center gap-2 mb-3 text-sm font-medium">
+            <LogOutIcon className="w-5 h-5" />
             Logout
           </Button>
         </>
       ) : (
-        <Button onClick={handleLogin} className="text-sm font-medium">
+        <Button onClick={handleLogin} className="flex items-center gap-2 text-sm font-medium">
+          <UserIcon className="w-5 h-5" />
           Login
         </Button>
       )}
