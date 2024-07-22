@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { HomeIcon, SettingsIcon, LogOutIcon, UserIcon } from "lucide-react"; 
+import { HomeIcon, SettingsIcon, LogOutIcon, UserIcon } from "lucide-react";
 
 export function UserOptionsMenu() {
   const { data: session } = useSession();
@@ -23,12 +23,20 @@ export function UserOptionsMenu() {
   };
 
   const handleLogout = () => {
-
+    // Add your logout logic here
+    // signOut();
   };
 
   if (!mounted) {
     return null;
   }
+
+  const getFirstName = () => {
+    if (session && session.user && session.user.name) {
+      return session.user.name.split(" ")[0];
+    }
+    return '';
+  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -44,7 +52,7 @@ export function UserOptionsMenu() {
             ) : (
               <UserIcon className="w-8 h-8" />
             )}
-            <span>{session.user.name}</span>
+            <span>Hello, {getFirstName()}</span>!{/* Display first name with greeting */}
           </div>
           <Link href="/dashboard" className="flex items-center gap-2 transition-colors hover:text-primary" prefetch={false}>
             <HomeIcon className="w-5 h-7" />
