@@ -111,7 +111,7 @@ const RightSidebar = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-bold">Tags</h3>
+          <h3 className="text-lg font-bold">Trending Tags</h3>
           <div className="mt-4 grid gap-4">
             <div className="flex items-center gap-2">
               <Link
