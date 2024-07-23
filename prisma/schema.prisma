@@ -1,41 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
-  user_id       String     @id @default(uuid())
+  user_id       String       @id @default(uuid())
   name          String
-  email         String     @unique
+  email         String       @unique
   profile_photo String?
-  created_at    DateTime   @default(now())
-  newsletters   Newsletter[]
-  followers     Follower[] @relation("UserFollowed")
-  following     Follower[] @relation("UserFollowing")
-  likes         Like[]
+  created_at    DateTime     @default(now())
   favorites     Favorite[]
+  followers     Follower[]   @relation("UserFollowed")
+  following     Follower[]   @relation("UserFollowing")
+  likes         Like[]
+  newsletters   Newsletter[]
   userTags      UserTag[]
 }
 
 model Newsletter {
-  newsletter_id       Int                  @id @default(autoincrement())
+  newsletter_id       Int                 @id @default(autoincrement())
   user_id             String
   sender              String
   date                DateTime
   html_file_url       String
   full_screenshot_url String?
   top_screenshot_url  String?
-  likes_count         Int                  @default(0)
-  created_at          DateTime             @default(now())
-  user                User                 @relation(fields: [user_id], references: [user_id])
-  likes               Like[]
+  likes_count         Int                 @default(0)
+  created_at          DateTime            @default(now())
   favorites           Favorite[]
-  newsletterTags      NewsletterTag[]
   featuredNewsletter  FeaturedNewsletter?
+  likes               Like[]
+  user                User                @relation(fields: [user_id], references: [user_id])
+  newsletterTags      NewsletterTag[]
 }
 
 model Follower {
@@ -49,8 +49,8 @@ model Follower {
 model Tag {
   tag_id         Int             @id @default(autoincrement())
   name           String          @unique
-  userTags       UserTag[]
   newsletterTags NewsletterTag[]
+  userTags       UserTag[]
 }
 
 model NewsletterTag {
@@ -62,27 +62,27 @@ model NewsletterTag {
 }
 
 model UserTag {
-  id      Int   @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   user_id String
   tag_id  Int
-  user    User  @relation(fields: [user_id], references: [user_id])
-  tag     Tag   @relation(fields: [tag_id], references: [tag_id])
+  tag     Tag    @relation(fields: [tag_id], references: [tag_id])
+  user    User   @relation(fields: [user_id], references: [user_id])
 }
 
 model Like {
   like_id       Int        @id @default(autoincrement())
   user_id       String
   newsletter_id Int
-  user          User       @relation(fields: [user_id], references: [user_id])
   newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+  user          User       @relation(fields: [user_id], references: [user_id])
 }
 
 model Favorite {
   favorite_id   Int        @id @default(autoincrement())
   user_id       String
   newsletter_id Int
-  user          User       @relation(fields: [user_id], references: [user_id])
   newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
+  user          User       @relation(fields: [user_id], references: [user_id])
 }
 
 model FeaturedNewsletter {

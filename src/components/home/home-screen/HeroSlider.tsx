@@ -25,7 +25,7 @@ const ImageSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 500); // Change image every 500ms (0.5 seconds)
+    }, 700); 
 
     return () => clearInterval(interval);
   }, []);
@@ -36,7 +36,7 @@ const ImageSlider = () => {
       alt={"The internet newsletter archive app"}
       fill
       priority
-      className="object-cover opacity-90 pointer-events-none select-none height-full object-top transition-opacity duration-500 -z-100"
+      className="object-cover opacity-90 pointer-events-none select-none height-full object-top transition-opacity duration-700 -z-100"
     />
   );
 };
