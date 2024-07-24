@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import confetti from "canvas-confetti";
 
 const YouRockButton: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const runConfetti = () => {
@@ -26,6 +27,7 @@ const YouRockButton: React.FC = () => {
   };
 
   const handleButtonClick = () => {
+    setClickCount(prevCount => prevCount + 1);
     runConfetti();
     setShowModal(true);
     setTimeout(() => {
@@ -34,7 +36,7 @@ const YouRockButton: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center">
       <Button
         variant="ghost"
         size="icon"
@@ -47,6 +49,7 @@ const YouRockButton: React.FC = () => {
       >
         <HandMetal className="h-5 w-5" />
       </Button>
+      <p className="ml-2 text-m bg-yellow-500 dark:text-black py-1 px-2 rounded-xl">{clickCount}</p> {/* Display click count next to the button */}
       {showModal && (
         <div
           className="absolute flex items-center justify-center"
