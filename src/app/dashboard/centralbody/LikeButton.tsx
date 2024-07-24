@@ -12,6 +12,7 @@ interface LikeButtonProps {
 
 const LikeButton: React.FC<LikeButtonProps> = ({ userId, newsletterId }) => {
   const [liked, setLiked] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (!userId) return;

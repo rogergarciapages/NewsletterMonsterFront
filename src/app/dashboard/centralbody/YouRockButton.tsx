@@ -49,7 +49,7 @@ const YouRockButton: React.FC = () => {
       >
         <HandMetal className="h-5 w-5" />
       </Button>
-      <p className="ml-2 text-m bg-yellow-500 dark:text-black py-1 px-2 rounded-xl">{clickCount}</p> {/* Display click count next to the button */}
+      <p className="ml-2 text-sm bg-yellow-500 dark:text-black py-1 px-2 rounded-xl">{clickCount}</p> {/* Display click count next to the button */}
       {showModal && (
         <div
           className="absolute flex items-center justify-center"
