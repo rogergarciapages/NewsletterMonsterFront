@@ -46,7 +46,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/next-auth.d.ts" // Include the lib folder for type declarations
+    "lib/next-auth.d.ts", "src/global.d.ts" // Include the lib folder for type declarations
 , "scripts/testPrismaUserCreation.js"  ],
   "exclude": [
     "node_modules"

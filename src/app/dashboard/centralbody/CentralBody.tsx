@@ -1,82 +1,49 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { HandMetal, MessageCircleIcon, RepeatIcon, HeartIcon, SettingsIcon, StarIcon } from "lucide-react";
+import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { MessageCircleIcon, RepeatIcon } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import confetti from "canvas-confetti";
+import LikeButton from "./LikeButton"; // Import from the correct path
+import YouRockButton from "./YouRockButton"; // Import from the correct path
 
 export function CentralBody() {
-  const [counter, setCounter] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { data: session, status } = useSession();
 
-  const runConfetti = () => {
-    if (!buttonRef.current) return;
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
-    const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
-    const x = left + width / 2;
-    const y = top + height / 2;
-
-    confetti({
-      particleCount: 50,
-      startVelocity: 30,
-      spread: 45,
-      origin: { x: x / window.innerWidth, y: y / window.innerHeight },
-      scalar: 0.5,
-    });
-  };
-
-  const handleButtonClick = () => {
-    setCounter((prevCounter) => prevCounter + 1);
-    runConfetti();
-    setShowModal(true);
-
-    setTimeout(() => {
-      setShowModal(false);
-    }, 1500);
-  };
+  if (status === "unauthenticated") {
+    return <div>Please log in to see the dashboard.</div>;
+  }
 
   return (
     <div className="flex-1 p-6 space-y-5 dark:bg-[#222]">
       <div className="grid gap-6 dark:bg-[#222]">
-
         <div className="grid gap-4">
           <Card className="dark:bg-[#222] dark:border-[#494949]">
-            <CardHeader className="flex flex-col items-start  gap-2 sm:flex-row sm:items-center">
+            <CardHeader className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
                 <Avatar className="h-10 w-10">
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage src={session?.user?.image ?? "/placeholder-user.jpg"} />
                   <AvatarFallback>JP</AvatarFallback>
                 </Avatar>
                 <div>
-                    <div className="font-medium">John Doe</div>
-                    <div className="text-sm text-muted-foreground">
-                    <p>@johndoe</p>
-
+                  <div className="font-medium">{session?.user?.name ?? "John Doe"}</div>
+                  <div className="text-sm text-muted-foreground">
+                    <p>@{session?.user?.email?.split('@')[0] ?? "johndoe"}</p>
                   </div>
                 </div>
               </div>
-
             </CardHeader>
             <CardContent>
               <p>
                 Excited to share my latest project with you all! Check it out and let me know what you think. #coding #webdev
               </p>
-              <img
-                src="/placeholder.svg"
-                width={800}
-                height={450}
-                alt="Project Screenshot"
-                className="mt-4 w-full rounded-md"
-              />
+              <img src="/placeholder.svg" width={800} height={450} alt="Project Screenshot" className="mt-4 w-full rounded-md" />
             </CardContent>
             <CardFooter className="flex items-center gap-2">
               <Button variant="ghost" size="icon">
@@ -85,56 +52,8 @@ export function CentralBody() {
               <Button variant="ghost" size="icon">
                 <RepeatIcon className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
-                <HeartIcon className="h-5 w-5" />
-              </Button>
-              <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  ref={buttonRef}
-                  onClick={handleButtonClick}
-                  title="Rock Yeah!"
-                  className="transition-transform duration-200 ease-in-out hover:bg-primary hover:scale-110"
-                  onMouseDown={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-                  onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                >
-                  <HandMetal className="h-5 w-5" />
-                </Button>
-                {showModal && (
-                  <div
-                    className="absolute flex items-center justify-center"
-                    style={{
-                      bottom: "100%",
-                      left: "50%",
-                      transform: "translateX(-50%) translateY(-10px)",
-                      padding: "5px 10px",
-                      backgroundColor: "#000",
-                      color: "#fff",
-                      borderRadius: "5px",
-                      zIndex: 10,
-                      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: "-6px",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        width: "0",
-                        height: "0",
-                        borderLeft: "8px solid transparent",
-                        borderRight: "8px solid transparent",
-                        borderTop: "8px solid #000",
-                      }}
-                    />
-                    <p className="text-[8px]">You rock it!</p>
-                  </div>
-                )}
-              </div>
-              <span>{counter}</span>
+              {session && session.user && <LikeButton userId={session.user.id} newsletterId={1} />}
+              <YouRockButton />
             </CardFooter>
           </Card>
           {/* ... other cards ... */}

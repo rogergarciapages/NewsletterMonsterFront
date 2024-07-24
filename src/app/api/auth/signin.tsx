@@ -1,47 +1,37 @@
-"use cient"
+"use client"
 
 import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const SignUp = () => {
+const SignIn = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [name, setName] = useState<string>('');
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, name }), // Ensure data is correctly sent
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: email, // Ensure email is correctly passed
+      password: password, // Ensure password is correctly passed
+      callbackUrl: `${window.location.origin}/dashboard`, // You can adjust this
     });
 
-    if (res.ok) {
-      router.push('/auth/signin');
+    if (result?.error) {
+      setError(result.error);
     } else {
-      const data = await res.json();
-      setError(data.error || 'Failed to sign up');
+      router.push(result?.url || '/dashboard');
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold mb-8">Sign Up</h1>
+      <h1 className="text-4xl font-bold mb-8">Sign In</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form className="w-full max-w-sm" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full px-3 py-2 mb-4 border rounded-md"
-          required
-        />
         <input
           type="email"
           placeholder="Email"
@@ -59,14 +49,14 @@ const SignUp = () => {
           required
         />
         <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-white rounded-md">
-          Sign Up
+          Sign In
         </button>
       </form>
       <p className="mt-4">
-        Already have an account? <a href="/auth/signin" className="text-blue-600">Sign In</a>
+        Don't have an account? <a href="/auth/signup" className="text-blue-600">Sign Up</a>
       </p>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

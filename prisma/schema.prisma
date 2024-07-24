@@ -11,6 +11,7 @@ model User {
   user_id       String       @id @default(uuid())
   name          String
   email         String       @unique
+  password      String       // New line added for password
   profile_photo String?
   created_at    DateTime     @default(now())
   favorites     Favorite[]
@@ -75,6 +76,8 @@ model Like {
   newsletter_id Int
   newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id])
   user          User       @relation(fields: [user_id], references: [user_id])
+
+  @@unique([user_id, newsletter_id]) // Composite unique constraint
 }
 
 model Favorite {

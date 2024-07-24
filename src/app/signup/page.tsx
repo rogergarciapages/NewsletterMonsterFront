@@ -1,7 +1,7 @@
-"use cient"
+"use client";  // <- Add this line at the top
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('');
@@ -18,14 +18,18 @@ const SignUp = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, name }), // Ensure data is correctly sent
+      body: JSON.stringify({ email, password, name }),
     });
 
     if (res.ok) {
-      router.push('/auth/signin');
+      router.push('/login');
     } else {
-      const data = await res.json();
-      setError(data.error || 'Failed to sign up');
+      try {
+        const data = await res.json();
+        setError(data.error || 'Failed to sign up');
+      } catch (err) {
+        setError('Unexpected error occurred');
+      }
     }
   };
 
@@ -63,7 +67,7 @@ const SignUp = () => {
         </button>
       </form>
       <p className="mt-4">
-        Already have an account? <a href="/auth/signin" className="text-blue-600">Sign In</a>
+        Already have an account? <a href="/login" className="text-blue-600">Sign In</a>
       </p>
     </div>
   );
