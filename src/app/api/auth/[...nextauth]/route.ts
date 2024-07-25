@@ -44,7 +44,7 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async session({ session, token }: { session: any, token: any }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (token.id) {
         session.user = {
           ...session.user,
@@ -54,7 +54,7 @@ const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async jwt({ token, user }: { token: any, user: any }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.id = user.id;
         token.image = user.image;
