@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma'; // Ensure prisma is setup correctly
+
+// Define Like interface
+interface Like {
+  user_id: string;
+  newsletter_id: number;
+}
+
+// Mock data source - replace this with your actual data source logic
+let mockLikes: Like[] = [];
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -11,14 +19,10 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const like = await prisma.like.findUnique({
-      where: {
-        user_id_newsletter_id: {
-          user_id: userId,
-          newsletter_id: Number(newsletterId),
-        },
-      },
-    });
+    // Check if the like exists in the mock data source
+    const like = mockLikes.find(
+      (like) => like.user_id === userId && like.newsletter_id === Number(newsletterId)
+    );
 
     return NextResponse.json({ liked: !!like }, { status: 200 });
   } catch (error) {

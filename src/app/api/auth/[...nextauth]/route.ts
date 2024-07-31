@@ -1,10 +1,18 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { prisma } from '@/lib/prisma';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import bcrypt from 'bcryptjs';
+
+// Mock user data or use another database solution
+// Example mock user data
+const mockUser = {
+  user_id: '1',
+  name: 'John Doe',
+  email: 'johndoe@example.com',
+  password: bcrypt.hashSync('password123', 10), // Ensure the password is hashed similarly to your stored passwords
+  profile_photo: 'https://example.com/photo.jpg',
+};
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -19,9 +27,8 @@ const authOptions: NextAuthOptions = {
           throw new Error('Email and password are required');
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
+        // Find user from your data source
+        const user = mockUser; // Replace this with your user fetching logic
 
         if (user && bcrypt.compareSync(credentials.password, user.password)) {
           return { id: user.user_id, name: user.name, email: user.email, image: user.profile_photo ?? "" };
@@ -39,7 +46,6 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
   },

@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { MessageCircleIcon, RepeatIcon } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import LikeButton from "./LikeButton"; // Import from the correct path
-import YouRockButton from "./YouRockButton"; // Import from the correct path
+import LikeButton from "./LikeButton"; 
+import YouRockButton from "./YouRockButton"; 
 
 export function CentralBody() {
   const { data: session, status } = useSession();

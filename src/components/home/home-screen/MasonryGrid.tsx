@@ -25,7 +25,7 @@ const MasonryGrid = () => {
                     onMouseMove={(e) => handleMouseMove(e,i)}
                 >
                     <Image
-                    src={`/featured/image${i + 1}.webp`}
+                    src={`/featured/slider/image${i + 1}.webp`}
                     className='cursor-pointer hover:scale-150 transition-transform duration-500 ease-in-out'
                     alt='Featured Newsletter'
                     style={{transformOrigin:`${mousePosition.x}% ${mousePosition.y}%`, }}

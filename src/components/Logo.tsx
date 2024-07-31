@@ -33,16 +33,18 @@ export function Logo() {
   const LogoLetters = currentTheme === "dark" ? LogoLettersOnlyDark : LogoLettersOnlyLight;
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex w-[256px] items-center justify-center">
       <div className="w-[44px] h-[56px] z-80">
         <MonsterIcon />
       </div>
       <div
-        className={`w-auto h-[56px] z-80 transition-opacity duration-1000 ${
+        className={`w-[220px] h-[56px] z-80 transition-opacity duration-1000 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
+        style={{ position: 'relative' }}
       >
-        <LogoLetters className="h-full" />
+        <div style={{ width: '220px', height: '56px', position: 'absolute', top: 0, left: 0 }}></div>
+        <LogoLetters className="h-full w-full" />
       </div>
     </div>
   );

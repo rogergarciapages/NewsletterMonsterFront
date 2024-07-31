@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma'; // Ensure prisma is setup correctly
+
+// Define Like interface
+interface Like {
+  user_id: string;
+  newsletter_id: string;
+}
+
+// Mock data source - replace this with your actual data source logic
+let mockLikes: Like[] = [];
 
 export async function POST(req: NextRequest) {
   const { userId, newsletterId } = await req.json();
@@ -9,33 +17,19 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const existingLike = await prisma.like.findUnique({
-      where: {
-        user_id_newsletter_id: {
-          user_id: userId,
-          newsletter_id: newsletterId,
-        },
-      },
-    });
+    // Check if the like already exists in the mock data source
+    const existingLikeIndex = mockLikes.findIndex(
+      (like) => like.user_id === userId && like.newsletter_id === newsletterId
+    );
 
     let liked;
-    if (existingLike) {
-      await prisma.like.delete({
-        where: {
-          user_id_newsletter_id: {
-            user_id: userId,
-            newsletter_id: newsletterId,
-          },
-        },
-      });
+    if (existingLikeIndex !== -1) {
+      // Like exists, remove it
+      mockLikes.splice(existingLikeIndex, 1);
       liked = false;
     } else {
-      await prisma.like.create({
-        data: {
-          user_id: userId,
-          newsletter_id: newsletterId,
-        },
-      });
+      // Like doesn't exist, create it
+      mockLikes.push({ user_id: userId, newsletter_id: newsletterId });
       liked = true;
     }
 

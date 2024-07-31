@@ -1,24 +1,19 @@
-// next.config.mjs
+import path from 'path';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true, // Enables React strict mode for catching potential issues
-
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-      },
-    ],
-  },
+  reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            icon: true,
+          },
+        },
+      ],
     });
 
     return config;
