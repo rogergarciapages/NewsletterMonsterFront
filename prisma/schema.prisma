@@ -1,43 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
-generator client {
-  provider = "prisma-client-js"
+model Bookmark {
+  bookmark_id        Int       @id @default(autoincrement())
+  user_id            String    @db.Uuid
+  bookmarked_item_id String    @db.Uuid
+  created_at         DateTime? @default(now()) @db.Timestamp(6)
+  User               User      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model User {
-  user_id       String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  name          String?   @unique @db.VarChar(255)
-  username      String?   @unique @db.VarChar(255)
-  email         String    @unique @db.VarChar(255)
-  profile_photo String?
-  password      String
-  created_at    DateTime? @default(now()) @db.Timestamp(6)
-  role          String    @default("FREE") @db.VarChar
-  full_name     String?   @db.VarChar
-  bio           String?
-  website       String?
-  location      String?   @db.VarChar
-  date_of_birth DateTime? @db.Date
-  updated_at    DateTime? @default(now()) @db.Timestamp(6)
-  status        String?   @default("active") @db.VarChar
-  last_login    DateTime? @db.Timestamp(6)
-  Bookmark      Bookmark[]
-  Favorite      Favorite[]
-  Following     Follower[] @relation("UserFollowing")
-  Follower      Follower[] @relation("UserFollowers")
-  Like          Like[]
-  Newsletter    Newsletter[]
-  UserTag       UserTag[]
-  YouRock       YouRock[]
-  Comment       Comment[]
-  CommentLike   CommentLike[]
-  Post          Post[]
-  FollowFollower Follow[] @relation("FollowerFollower")
-  FollowFollowing Follow[] @relation("FollowerFollowing")
+model Comment {
+  id          String        @id @default(dbgenerated("extensions.uuid_generate_v4()")) @db.Uuid
+  content     String
+  user_id     String        @db.Uuid
+  post_id     String        @db.Uuid
+  created_at  DateTime?     @default(now()) @db.Timestamp(6)
+  updated_at  DateTime?     @default(now()) @db.Timestamp(6)
+  User        User          @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  CommentLike CommentLike[]
+}
+
+model CommentLike {
+  id         String    @id @default(dbgenerated("extensions.uuid_generate_v4()")) @db.Uuid
+  comment_id String    @db.Uuid
+  user_id    String    @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  Comment    Comment   @relation(fields: [comment_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  User       User      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Favorite {
+  favorite_id      Int       @id @default(autoincrement())
+  user_id          String?   @db.Uuid
+  favorite_item_id String?   @db.Uuid
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  User             User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Follow {
+  id                             String    @id @default(dbgenerated("extensions.uuid_generate_v4()")) @db.Uuid
+  follower_id                    String    @db.Uuid
+  following_id                   String    @db.Uuid
+  created_at                     DateTime? @default(now()) @db.Timestamp(6)
+  User_Follow_follower_idToUser  User      @relation("Follow_follower_idToUser", fields: [follower_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  User_Follow_following_idToUser User      @relation("Follow_following_idToUser", fields: [following_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Follower {
+  id                              Int    @id @default(autoincrement())
+  user_id                         String @db.Uuid
+  follower_id                     String @db.Uuid
+  User_Follower_follower_idToUser User   @relation("Follower_follower_idToUser", fields: [follower_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+  User_Follower_user_idToUser     User   @relation("Follower_user_idToUser", fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Like {
+  like_id       Int        @id @default(autoincrement())
+  user_id       String     @db.Uuid
+  newsletter_id Int
+  created_at    DateTime?  @default(now()) @db.Timestamp(6)
+  Newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id], onDelete: Cascade, onUpdate: NoAction)
+  User          User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model Newsletter {
@@ -49,32 +78,53 @@ model Newsletter {
   full_screenshot_url String?
   top_screenshot_url  String?
   likes_count         Int?      @default(0)
-  youRocks_count      Int?      @default(0)
+  you_rocks_count     Int?      @default(0)
   created_at          DateTime? @default(now()) @db.Timestamp(6)
-  User                User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
   Like                Like[]
-
-  @@unique([user_id, newsletter_id])
+  User                User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model Like {
-  like_id       Int       @id @default(autoincrement())
-  user_id       String    @db.Uuid
-  newsletter_id Int
-  created_at    DateTime  @default(now()) @db.Timestamp(6)
-  User          User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
-  Newsletter    Newsletter @relation(fields: [newsletter_id], references: [newsletter_id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@unique([user_id, newsletter_id])
+model Post {
+  id         String    @id @default(dbgenerated("extensions.uuid_generate_v4()")) @db.Uuid
+  title      String
+  content    String
+  user_id    String    @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  User       User      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model Follower {
-  follower_id       Int       @id @default(autoincrement())
-  user_id           String?   @db.Uuid
-  following_user_id String?   @db.Uuid
-  created_at        DateTime? @default(now()) @db.Timestamp(6)
-  Following         User?     @relation("UserFollowing", fields: [following_user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
-  User              User?     @relation("UserFollowers", fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+model User {
+  user_id                             String        @id @default(dbgenerated("extensions.uuid_generate_v4()")) @db.Uuid
+  name                                String?       @unique @db.VarChar(255)
+  username                            String?       @unique @db.VarChar(255)
+  email                               String        @unique @db.VarChar(255)
+  profile_photo                       String?
+  password                            String
+  created_at                          DateTime?     @default(now()) @db.Timestamp(6)
+  role                                String?       @default("FREE") @db.VarChar
+  full_name                           String?       @db.VarChar
+  bio                                 String?
+  website                             String?
+  location                            String?       @db.VarChar
+  date_of_birth                       DateTime?     @db.Date
+  updated_at                          DateTime?     @default(now()) @db.Timestamp(6)
+  status                              String?       @default("active") @db.VarChar
+  last_login                          DateTime?     @db.Timestamp(6)
+  email_verified                      DateTime?     @db.Timestamp(6)
+  Bookmark                            Bookmark[]
+  Comment                             Comment[]
+  CommentLike                         CommentLike[]
+  Favorite                            Favorite[]
+  Follow_Follow_follower_idToUser     Follow[]      @relation("Follow_follower_idToUser")
+  Follow_Follow_following_idToUser    Follow[]      @relation("Follow_following_idToUser")
+  Follower_Follower_follower_idToUser Follower[]    @relation("Follower_follower_idToUser")
+  Follower_Follower_user_idToUser     Follower[]    @relation("Follower_user_idToUser")
+  Like                                Like[]
+  Newsletter                          Newsletter[]
+  Post                                Post[]
+  UserTag                             UserTag[]
+  YouRock                             YouRock[]
 }
 
 model UserTag {
@@ -84,63 +134,10 @@ model UserTag {
   User    User?   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model Favorite {
-  favorite_id      Int       @id @default(autoincrement())
-  user_id          String?   @db.Uuid
-  favorite_item_id String?   @db.Uuid
-  created_at       DateTime? @default(now()) @db.Timestamp(6)
-  User             User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
-}
-
 model YouRock {
   yourock_id        Int       @id @default(autoincrement())
   user_id           String?   @db.Uuid
   yourocked_item_id String?   @db.Uuid
   created_at        DateTime? @default(now()) @db.Timestamp(6)
   User              User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
-}
-
-model Bookmark {
-  bookmark_id        Int       @id @default(autoincrement())
-  user_id            String?   @db.Uuid
-  bookmarked_item_id String?   @db.Uuid
-  created_at         DateTime? @default(now()) @db.Timestamp(6)
-  User               User?     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
-}
-
-model Comment {
-  id        String   @id @default(uuid())
-  content   String
-  userId    String
-  postId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [user_id])
-}
-
-model CommentLike {
-  id        String   @id @default(uuid())
-  commentId String
-  userId    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [user_id])
-}
-
-model Follow {
-  id         String   @id @default(uuid())
-  followerId String
-  followingId String
-  createdAt DateTime @default(now())
-  follower   User @relation("FollowerFollower", fields: [followerId], references: [user_id])
-  following  User @relation("FollowerFollowing", fields: [followingId], references: [user_id])
-}
-
-model Post {
-  id        String   @id @default(uuid())
-  title     String
-  content   String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [user_id])
 }

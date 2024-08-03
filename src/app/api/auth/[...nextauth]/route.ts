@@ -1,75 +1,30 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GithubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
-import bcrypt from 'bcryptjs';
+import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import LinkedInProvider from "next-auth/providers/linkedin";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "../../../../lib/prisma"; // Adjust the path to your Prisma instance
 
-// Mock user data or use another database solution
-// Example mock user data
-const mockUser = {
-  user_id: '1',
-  name: 'John Doe',
-  email: 'johndoe@example.com',
-  password: bcrypt.hashSync('password123', 10), // Ensure the password is hashed similarly to your stored passwords
-  profile_photo: 'https://example.com/photo.jpg',
-};
-
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      authorize: async (credentials) => {
-        if (!credentials || !credentials.email || !credentials.password) {
-          throw new Error('Email and password are required');
-        }
-
-        // Find user from your data source
-        const user = mockUser; // Replace this with your user fetching logic
-
-        if (user && bcrypt.compareSync(credentials.password, user.password)) {
-          return { id: user.user_id, name: user.name, email: user.email, image: user.profile_photo ?? "" };
-        }
-
-        return null;
-      },
-    }),
-    GithubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-    }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    }),
+    LinkedInProvider({
+      clientId: process.env.LINKEDIN_CLIENT_ID!,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
     }),
   ],
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET!,
   session: {
-    strategy: 'jwt',
-  },
-  callbacks: {
-    async session({ session, token }: { session: any; token: any }) {
-      if (token.id) {
-        session.user = {
-          ...session.user,
-          id: token.id as string,
-          image: token.image as string,
-        };
-      }
-      return session;
-    },
-    async jwt({ token, user }: { token: any; user: any }) {
-      if (user) {
-        token.id = user.id;
-        token.image = user.image;
-      }
-      return token;
-    },
-  },
-  pages: {
-    signIn: '/login',  // Redirect to unified login page
+    strategy: "jwt",
   },
 };
 
