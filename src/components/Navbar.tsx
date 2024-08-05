@@ -1,27 +1,18 @@
-"use client";
-
+// C:\Users\Usuario\Documents\GitHub\nm3\src\components\Navbar.tsx
 import React from "react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { UserDropdownMenu } from "@/components/ui/user-dropdown-menu";
-import { UserOptionsMenu } from "@/components/ui/UserOptionsMenu"; 
+import { UserOptionsMenu } from "@/components/ui/UserOptionsMenu";
+import LoginButton from "@/components/LoginButton"; // Import LoginButton
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
-export function NavBar() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  const handleLogin = () => {
-    router.push('/login');
-  };
-
+export const NavBar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -51,13 +42,8 @@ export function NavBar() {
             About
           </Link>
           <div className="flex items-center align-middle text-primary mx-auto gap-2 border-ring md:flex-column sm:flex-column">
-            {session ? (
-              <UserDropdownMenu />
-            ) : (
-              <Button onClick={handleLogin} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
-                Login
-              </Button>
-            )}
+            <UserDropdownMenu />
+            <LoginButton /> {/* Client component for login */}
           </div>
           <ModeToggle /> {/* Retain ModeToggle for desktop */}
         </nav>
@@ -92,9 +78,9 @@ export function NavBar() {
       </div>
     </header>
   );
-}
+};
 
-function MenuIcon(props: IconProps) {
+export function MenuIcon(props: IconProps) {
   return (
     <svg
       {...props}
@@ -115,7 +101,7 @@ function MenuIcon(props: IconProps) {
   );
 }
 
-function XIcon(props: IconProps) {
+export function XIcon(props: IconProps) {
   return (
     <svg
       {...props}
@@ -134,3 +120,4 @@ function XIcon(props: IconProps) {
     </svg>
   );
 }
+

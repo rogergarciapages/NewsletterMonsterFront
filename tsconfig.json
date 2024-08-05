@@ -15,7 +15,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"],
+      "@/components/*": ["src/components/*", "./@/components/*"], // Consolidate paths
       "@/assets/*": ["src/assets/*"],
       "@/lib/*": ["src/lib/*"],
       "@/styles/*": ["src/styles/*"],
