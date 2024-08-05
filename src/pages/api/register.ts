@@ -1,40 +1,35 @@
+// C:\Users\Usuario\Documents\GitHub\nm3\src\pages\api\register.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
-
-// Define User interface
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
-
-// Mock data source - replace this with your actual data source logic
-let mockUsers: User[] = [];
+import prisma from '../../lib/prisma';
+import { userSchema } from '../../schemas/userSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { name, email, password } = req.body;
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     try {
-      // Check if user already exists in the mock data source
-      const existingUser = mockUsers.find(user => user.email === email);
+      const userData = userSchema.parse(req.body);
+
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email: userData.email },
+      });
 
       if (existingUser) {
         return res.status(400).json({ error: 'User already exists' });
       }
 
-      // Create a new user
-      const user: User = {
-        id: mockUsers.length + 1,
-        name,
-        email,
-        password: hashedPassword,
-      };
-      mockUsers.push(user);
+      const user = await prisma.user.create({
+        data: {
+          name: userData.name,
+          surname: userData.surname,
+          company_name: userData.company_name,
+          username: userData.username,
+          email: userData.email,
+          password: hashedPassword,
+          role: 'user',
+        },
+      });
 
       res.status(201).json({ user });
     } catch (error) {

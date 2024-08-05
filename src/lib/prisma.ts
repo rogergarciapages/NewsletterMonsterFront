@@ -1,6 +1,9 @@
-// [YourApp]/lib/prisma.ts
-import { PrismaClient } from "@prisma/client";
+// src/lib/prisma.ts
+import { PrismaClient } from '@prisma/client';
+import { withAccelerate } from '@prisma/extension-accelerate';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error']
+}).$extends(withAccelerate());
 
 export default prisma;
