@@ -1,21 +1,29 @@
 // C:\Users\Usuario\Documents\GitHub\nm3\src\app\api\auth\[...nextauth]\route.ts
-"use client"
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import { prisma } from "@/lib/prisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { NextAuthOptions } from "next-auth";
 
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GitHubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
-import prisma from '../../../../lib/prisma';
-import bcrypt from 'bcryptjs';
-import { NextApiRequest, NextApiResponse } from 'next';
+const GITHUB_ID = process.env.GITHUB_ID as string;
+const GITHUB_SECRET = process.env.GITHUB_SECRET as string;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
 
-const authOptions: NextAuthOptions = {
+if (!GITHUB_ID || !GITHUB_SECRET || !GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+  throw new Error("Missing OAuth environment variables");
+}
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
-        email: { label: 'Email', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
         if (!credentials) {
@@ -39,16 +47,17 @@ const authOptions: NextAuthOptions = {
       },
     }),
     GitHubProvider({
-      clientId: process.env.GITHUB_ID || '',
-      clientSecret: process.env.GITHUB_SECRET || '',
+      clientId: GITHUB_ID,
+      clientSecret: GITHUB_SECRET,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
     }),
   ],
+  adapter: PrismaAdapter(prisma), // Ensure PrismaAdapter is correctly initialized
   pages: {
-    signIn: '/auth',
+    signIn: "/auth",
   },
   callbacks: {
     async session({ session, token }) {
@@ -61,13 +70,48 @@ const authOptions: NextAuthOptions = {
       };
       return session;
     },
+    async jwt({ token, user, account }) {
+      if (account) {
+        token.id = user?.id;
+        token.name = user?.name;
+        token.email = user?.email;
+        token.picture = user?.image;
+      }
+      return token;
+    },
+    async signIn({ user, account, profile }) {
+      try {
+        const userInDb = await prisma.user.upsert({
+          where: { email: user.email ?? '' },
+          update: {
+            name: user.name ?? '',
+            profile_photo: user.image ?? '',
+          },
+          create: {
+            email: user.email ?? '',
+            name: user.name ?? '',
+            profile_photo: user.image ?? '',
+            surname: '',
+            company_name: '',
+            username: '',
+            password: '',
+          },
+        });
+        return true;
+      } catch (error) {
+        console.error('Error during user upsert:', error);
+        return false;
+      }
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.includes('/auth')) {
+        return `${baseUrl}/dashboard`;
+      }
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
   },
 };
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-    return NextAuth(req, res, authOptions);
-}
+const handler = NextAuth(authOptions);
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-    return NextAuth(req, res, authOptions);
-}
+export { handler as GET, handler as POST };
