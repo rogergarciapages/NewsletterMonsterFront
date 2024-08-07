@@ -127,7 +127,7 @@ const PricingWrapper = () => {
       {
         title: 'standard',
         subtitle:
-          'Get links for your newsletter, exposure and get highlighted across the site.',
+          'Get quality links for your newsletter, exposure and get highlighted across the site.',
         price: 89,
         period: 'Per Month',
         items: [
@@ -172,7 +172,7 @@ const PricingWrapper = () => {
             description: 'Follow Link for every newsletter',
           },
           {
-            description: 'Enter NewsletterMonster awards.',
+            description: 'Automated social posting',
           },
         ],
         callToAction: {

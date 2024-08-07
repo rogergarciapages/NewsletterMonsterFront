@@ -1,9 +1,10 @@
 // src/pages/_app.tsx
 import { SessionProvider } from "next-auth/react";
+import '../styles/globals.css';
 import { ThemeProvider } from "@/components/theme-provider";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <ThemeProvider attribute="class" defaultTheme="system">
@@ -11,6 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ThemeProvider>
     </SessionProvider>
   );
-}
+};
 
 export default MyApp;
