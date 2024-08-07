@@ -1,7 +1,7 @@
 // C:\Users\Usuario\Documents\GitHub\nm3\src\pages\api\register.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
-import { prisma } from '../../lib/prisma'; // Correct import
+import { prisma } from '@/lib/prisma'; // Correct import
 import { userSchema } from '../../schemas/userSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

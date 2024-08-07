@@ -1,4 +1,3 @@
-// C:\Users\Usuario\Documents\GitHub\nm3\src\app\api\auth\[...nextauth]\route.ts
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
@@ -104,10 +103,10 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async redirect({ url, baseUrl }) {
-      if (url.includes('/auth')) {
+      if (url === '/auth') {
         return `${baseUrl}/dashboard`;
       }
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      return baseUrl;
     },
   },
 };

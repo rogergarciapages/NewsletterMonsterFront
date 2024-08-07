@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm prisma generate --no-engine && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -16,7 +16,7 @@
     "@nextui-org/divider": "^2.0.28",
     "@nextui-org/system": "^2.2.2",
     "@nextui-org/theme": "^2.2.6",
-    "@prisma/client": "^5.17.0",
+    "@prisma/client": "^5.18.0",
     "@prisma/extension-accelerate": "^1.1.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -40,6 +40,7 @@
     "next": "14.2.4",
     "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
+    "pg": "^8.12.0",
     "postcss": "^8.4.39",
     "react": "^18",
     "react-dom": "^18",
@@ -62,7 +63,8 @@
     "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
-    "prisma": "^5.17.0",
+    "prisma": "^5.18.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "watchpack": "^2.4.1"
   }
