@@ -13,7 +13,7 @@ const AuthButtons: React.FC<AuthButtonsProps> = ({ providers }) => {
         Object.values(providers).map((provider) => (
           <div key={provider.name}>
             <button onClick={() => signIn(provider.id)} className="btn btn-primary">
-              Sign in with {provider.name}
+              Sign inn with {provider.name}
             </button>
           </div>
         ))}

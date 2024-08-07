@@ -3,7 +3,7 @@ import { FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-gray-200 dark:border-slate-800 not-prose">
+    <footer className="relative border-t bg-[#222] border-gray-200 dark:border-slate-800 not-prose">
       <div className="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
         <div className="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">

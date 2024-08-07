@@ -11,6 +11,39 @@ datasource db {
   extensions        = [pgcrypto(map: "pgcrypto")]
 }
 
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            String  @db.Uuid // Ensure this type matches the User model's primary key type
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? // Add additional fields as necessary
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [user_id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       String   @db.Uuid
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [user_id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+}
+
 model Bookmark {
   bookmark_id        Int       @id @default(autoincrement())
   user_id            String    @db.Uuid
@@ -106,7 +139,7 @@ model User {
   surname                             String        @db.VarChar(255)
   company_name                        String        @db.VarChar(255)
   username                            String        @unique @db.VarChar(255)
-  email                               String        @unique @db.VarChar(255)
+  email                               String        @unique
   profile_photo                       String?
   password                            String
   created_at                          DateTime?     @default(now()) @db.Timestamp(6)
@@ -119,9 +152,11 @@ model User {
   updated_at                          DateTime?     @default(now()) @db.Timestamp(6)
   status                              String?       @default("active") @db.VarChar
   last_login                          DateTime?     @db.Timestamp(6)
-  email_verified                      DateTime?     @db.Timestamp(6)
-  twitter_username                    String?       @db.VarChar(255) // New field
-  instagram_username                  String?       @db.VarChar(255) // New field
+  emailVerified                       DateTime?     @db.Timestamp(6)
+  twitter_username                    String?       @db.VarChar(255)
+  instagram_username                  String?       @db.VarChar(255)
+  Account                             Account[]
+  Session                             Session[]
   Bookmark                            Bookmark[]
   Comment                             Comment[]
   CommentLike                         CommentLike[]

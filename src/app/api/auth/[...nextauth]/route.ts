@@ -1,110 +1,111 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 
-const GITHUB_ID = process.env.GITHUB_ID as string;
-const GITHUB_SECRET = process.env.GITHUB_SECRET as string;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
+const prisma = new PrismaClient();
 
-if (!GITHUB_ID || !GITHUB_SECRET || !GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
-  throw new Error("Missing OAuth environment variables");
-}
-
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
-      authorize: async (credentials) => {
-        if (!credentials) {
-          return null;
-        }
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
-
-        if (user && bcrypt.compareSync(credentials.password, user.password)) {
-          return {
-            id: user.user_id,
-            name: user.name || user.username || "",
-            email: user.email,
-            image: user.profile_photo || "",
-          };
-        }
-
-        return null;
-      },
-    }),
-    GitHubProvider({
-      clientId: GITHUB_ID,
-      clientSecret: GITHUB_SECRET,
-    }),
     GoogleProvider({
-      clientId: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      allowDangerousEmailAccountLinking: true,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
   ],
   adapter: PrismaAdapter(prisma),
-  pages: {
-    signIn: "/auth",
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
   },
+  debug: true, // Enable debugging
   callbacks: {
     async session({ session, token }) {
+      console.log("Session callback:", { session, token });
       session.user = {
         ...session.user,
-        id: token.id,
+        id: token.id as string,
         name: token.name || "",
         email: token.email || "",
-        image: token.picture || "",
+        image: token.image || "",
       };
       return session;
     },
     async jwt({ token, user, account }) {
+      console.log("JWT callback:", { token, user, account });
       if (account) {
         token.id = user?.id;
-        token.name = user?.name;
-        token.email = user?.email;
-        token.picture = user?.image;
+        token.name = user?.name || "";
+        token.email = user?.email || "";
+        token.image = user?.image || "";
       }
       return token;
     },
     async signIn({ user, account, profile }) {
+      console.log("SignIn callback:", { user, account, profile });
       try {
-        const userInDb = await prisma.user.upsert({
-          where: { email: user.email ?? '' },
-          update: {
-            name: user.name ?? '',
-            profile_photo: user.image ?? '',
-          },
-          create: {
-            email: user.email ?? '',
-            name: user.name ?? '',
-            profile_photo: user.image ?? '',
-            surname: '',
-            company_name: '',
-            username: '',
-            password: '',
-          },
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email ?? "" },
         });
+
+        let userId = existingUser ? existingUser.user_id : undefined;
+
+        if (existingUser) {
+          await prisma.user.update({
+            where: { email: user.email ?? "" },
+            data: {
+              name: user.name ?? "",
+              profile_photo: user.image ?? "",
+            },
+          });
+        } else {
+          const username = user.email?.split("@")[0] ?? "default_username";
+          const newUser = await prisma.user.create({
+            data: {
+              email: user.email ?? "",
+              name: user.name ?? "",
+              profile_photo: user.image ?? "",
+              surname: user.name?.split(" ").slice(1).join(" ") ?? "Default Surname",
+              company_name: "Default Company",
+              username: username,
+              password: username,
+            },
+          });
+          userId = newUser.user_id;
+        }
+
+        // At this point, userId should be set
+        if (account && userId) {
+          await prisma.account.create({
+            data: {
+              provider: account.provider,
+              type: account.type,
+              providerAccountId: account.providerAccountId,
+              access_token: account.access_token,
+              refresh_token: account.refresh_token,
+              expires_at: account.expires_at,
+              token_type: account.token_type,
+              id_token: account.id_token,
+              userId: userId, // Assign the userId here
+            },
+          });
+        }
+
         return true;
       } catch (error) {
-        console.error('Error during user upsert:', error);
+        console.error("Error during user signIn:", error);
         return false;
       }
     },
     async redirect({ url, baseUrl }) {
-      if (url === '/auth') {
-        return `${baseUrl}/dashboard`;
-      }
+      console.log("Redirect callback:", { url, baseUrl });
       return baseUrl;
     },
   },

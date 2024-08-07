@@ -1,14 +1,16 @@
-import { PrismaClient } from '@prisma/client/edge';
-import { withAccelerate } from '@prisma/extension-accelerate';
+// src/lib/prisma.ts
+import { PrismaClient } from "@prisma/client";
 
-// Extend Prisma client with Accelerate using the $extends method
-const prismaClient = new PrismaClient().$extends(withAccelerate());
-
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
-
-if (!globalForPrisma.prisma) {
-    // Cast extended Prisma client to standard PrismaClient type for compatibility
-    globalForPrisma.prisma = prismaClient as unknown as PrismaClient;
+declare global {
+  // Allow global `var` declarations
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
 }
 
-export const prisma = globalForPrisma.prisma;
+export const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
+
+if (process.env.NODE_ENV !== "production") global.prisma = prisma;
