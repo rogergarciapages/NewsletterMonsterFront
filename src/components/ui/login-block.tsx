@@ -6,29 +6,28 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState, FC } from "react";
+import { useTheme } from "next-themes";
+import clsx from "clsx";
 
 interface LoginBlockProps {
   onRegisterClick: () => void;
 }
 
-const dotPatternStyledark = {
-  background: `
-    linear-gradient(90deg, #212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
-    linear-gradient(#212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
-    #fff
-  `,
-};
+const dotPatternStyleLight = `
+  linear-gradient(90deg, #212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
+  linear-gradient(#212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
+  #222
+`;
 
-const dotPatternStyle = {
-  background: `
-    linear-gradient(90deg, #212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
-    linear-gradient(#212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
-    #222
-  `,
-};
+const dotPatternStyleDark = `
+  linear-gradient(90deg, #212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
+  linear-gradient(#212121 calc(50px - 1px), transparent 1%) center / 50px 50px,
+  #fff
+`;
 
 export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
   const [error, setError] = useState<string | null>(null);
+  const { theme } = useTheme();
 
   const handleLoginSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -50,7 +49,14 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
 
   return (
     <div className="grid w-full min-h-screen grid-cols-1 lg:grid-cols-2">
-      <div className="relative flex items-center justify-center p-6 lg:p-12" style={dotPatternStyledark}>
+      <div
+        className={clsx("relative flex items-center justify-center p-6 lg:p-12", {
+          "bg-[linear-gradient(90deg,_#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,linear-gradient(#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,#222]":
+            theme !== "dark",
+          "dark:bg-[linear-gradient(90deg,_#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,linear-gradient(#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,#fff]":
+            theme === "dark",
+        })}
+      >
         <div className="relative max-w-[480px] space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
@@ -150,3 +156,5 @@ const ChromeIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <line x1="10.88" x2="15.46" y1="21.94" y2="14" />
   </svg>
 );
+
+export default LoginBlock;
