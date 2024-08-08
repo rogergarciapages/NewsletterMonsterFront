@@ -65,9 +65,7 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
               Sign up and start expanding your newsletter reach today.
             </p>
           </div>
-          <Button variant="outline" onClick={onRegisterClick} className="flex items-center justify-center border-primary text-primary dark:text-white hover:bg-secondary hover:border-secondary transition duration-300">
-            Sign up <ArrowRightIcon className="ml-2 h-4 w-4" />
-          </Button>
+
         </div>
       </div>
       <div className="flex items-center justify-center p-6 lg:p-12">
@@ -75,35 +73,38 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold">Sign in to your account</h2>
             <p className="text-gray-700 dark:text-gray-200">
-              Enter your email and password below to sign in.
-            </p>
+Yep, you know what to do.            </p>
           </div>
           {error && <div className="text-red-500 text-center">{error}</div>}
           <div className="space-y-4">
             <form onSubmit={handleLoginSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="myemail@myawesomecompany.com" required className="block text-xl w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+                <Label htmlFor="email" className="text-md">Your email</Label>
+                <Input id="email" type="email" placeholder="myemail@myawesomecompany.com" required className="block w-full px-3 py-6 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-base" />
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="text-md"> Your password</Label>
                   <Link href="#" className="text-sm font-medium text-primary hover:underline" prefetch={false}>
                     Forgot password?
                   </Link>
                 </div>
-                <Input id="password" type="password" required className="block w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+                <Input id="password" type="password" required className="block w-full px-3 py-6 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-base" />
               </div>
-              <Button type="submit" className="w-full flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md hover:bg-muted transition duration-300">
+              <Button type="submit" className="w-full flex items-center text-md justify-center px-4 py-6 bg-primary text-white rounded-md hover:bg-muted transition duration-300">
                 Sign in <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="w-full flex items-center justify-center bg-[#292929] px-4 py-2 border border-gray-500 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-primary hover:text-white transition duration-300" onClick={() => signIn("google")}>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-indigo-900 px-4 py-6 border border-gray-500 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("google")}>
                 <ChromeIcon className="mr-2 ml-2 h-4 w-4" />
                 Sign in with Google
               </Button>
-              <Button variant="outline" className="w-full flex items-center justify-center bg-[#7289da] px-4 py-2 border border-gray-500 rounded-md text-white dark:hover:border-primary hover:bg-secondary hover:border-gray-200 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#7289da] px-4 py-6 border border-gray-500 rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
                 <DiscordIcon className="mr-2 ml-2 h-4 w-4" />
                 Sign in with Discord
+              </Button>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#0077b5] px-4 py-6 border border-gray-500 rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("linkedin")}>
+                <LinkedInIcon className="mr-2 ml-2 h-4 w-4" />
+                Sign in with LinkedIn
               </Button>
             </form>
           </div>
@@ -158,6 +159,20 @@ const DiscordIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
     <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
     <path d="M7 16.5c3.5 1 6.5 1 10 0" />
+  </svg>
+);
+
+const LinkedInIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+    <path d="M8 11l0 5" />
+    <path d="M8 8l0 .01" />
+    <path d="M12 16l0 -5" />
+    <path d="M16 16v-3a2 2 0 0 0 -4 0" />
   </svg>
 );
 
