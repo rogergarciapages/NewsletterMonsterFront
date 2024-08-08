@@ -15,11 +15,11 @@ export function HeroLanding({ currentImageIndex, images }: HeroLandingProps) {
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container grid gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12">
         <div className="space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-8">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
               Transform Your Newsletters into SEO Powerhouses
             </h1>
-            <p className="max-w-[600px] text-muted-foreground md:text-m/relaxed lg:text-base/relaxed xl:text-base/relaxed">
+            <p className="max-w-[600px] pb-8 text-muted-foreground md:text-m/relaxed lg:text-base/relaxed xl:text-base/relaxed">
               Empower your newsletters, Archive them beautifully. Boost SEO Instantly. Celebrate the art and creativity of newsletters. Explore our archive and enjoy the best newsletters, all in one place.
             </p>
           </div>
@@ -27,15 +27,13 @@ export function HeroLanding({ currentImageIndex, images }: HeroLandingProps) {
           <div className="px-1 py-1">
           <div className="grid gap-8 items-start justify-center">
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-torch-600 to-indigo-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-              <button className="relative px-7 py-4 bg-black rounded-lg leading-none flex items-center divide-x divide-gray-600">
+              <div className="absolute -inset-2.5 bg-gradient-to-r from-torch-600 to-indigo-500 rounded-lg blur opacity-75 group-hover:opacity-600 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+              <button className="relative px-7 py-4 bg-black rounded-lg leading-none flex items-center divide-x divide-black">
                 <span className="flex items-center space-x-5">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-rose-600 -rotate-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                  <span className="pr-6 text-base text-gray-100">Join now</span>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-cheese"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.519 20.008l16.481 -.008v-3.5a2 2 0 1 1 0 -4v-3.5h-16.722" /><path d="M21 9l-9.385 -4.992c-2.512 .12 -4.758 1.42 -6.327 3.425c-1.423 1.82 -2.288 4.221 -2.288 6.854c0 2.117 .56 4.085 1.519 5.721" /><path d="M15 13v.01" /><path d="M8 13v.01" /><path d="M11 16v.01" /></svg>
+                  <span className="pr-6 pt-1 text-md text-gray-100">Expand your Newsletter reach FREE!</span>
                 </span>
-                <span className="pl-6 text-base text-bold text-indigo-600 group-hover:text-gray-100 transition duration-300">for FREE!! &rarr;</span>
+                
               </button>
             </div>
           </div>

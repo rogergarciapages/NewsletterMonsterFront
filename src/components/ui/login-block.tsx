@@ -7,7 +7,6 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState, FC } from "react";
 import { useTheme } from "next-themes";
-import clsx from "clsx";
 
 interface LoginBlockProps {
   onRegisterClick: () => void;
@@ -47,15 +46,15 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
     }
   };
 
+  const getBackgroundStyle = () => {
+    return theme === "dark" ? dotPatternStyleDark : dotPatternStyleLight;
+  };
+
   return (
     <div className="grid w-full min-h-screen grid-cols-1 lg:grid-cols-2">
       <div
-        className={clsx("relative flex items-center justify-center p-6 lg:p-12", {
-          "bg-[linear-gradient(90deg,_#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,linear-gradient(#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,#222]":
-            theme !== "dark",
-          "dark:bg-[linear-gradient(90deg,_#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,linear-gradient(#212121_calc(50px_-_1px),_transparent_1%)_center_/_50px_50px,#fff]":
-            theme === "dark",
-        })}
+        className={`relative flex items-center justify-center p-6 lg:p-12 ${theme === "dark" ? "dark:bg-none" : "bg-none"}`}
+        style={{ background: getBackgroundStyle() }}
       >
         <div className="relative max-w-[480px] space-y-6">
           <div className="space-y-2">
@@ -102,6 +101,10 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
                 <ChromeIcon className="mr-2 ml-2 h-4 w-4" />
                 Sign in with Google
               </Button>
+              <Button variant="outline" className="w-full flex items-center justify-center bg-[#7289da] px-4 py-2 border border-gray-500 rounded-md text-white dark:hover:border-primary hover:bg-secondary hover:border-gray-200 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
+                <DiscordIcon className="mr-2 ml-2 h-4 w-4" />
+                Sign in with Discord
+              </Button>
             </form>
           </div>
           <div className="text-center text-sm text-gray-600 dark:text-white">
@@ -139,21 +142,22 @@ const ChromeIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="text-[#fff] mr-2"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="12" cy="12" r="4" />
-    <line x1="21.17" x2="12" y1="8" y2="8" />
-    <line x1="3.95" x2="8.54" y1="6.06" y2="14" />
-    <line x1="10.88" x2="15.46" y1="21.94" y2="14" />
+    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-google">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945z" />
+  </svg>
+);
+
+const DiscordIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-discord">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+    <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+    <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
+    <path d="M7 16.5c3.5 1 6.5 1 10 0" />
   </svg>
 );
 
