@@ -19,7 +19,7 @@ export function HeroLanding({ currentImageIndex, images }: HeroLandingProps) {
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
               Transform Your Newsletters into SEO Powerhouses
             </h1>
-            <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="max-w-[600px] text-muted-foreground md:text-m/relaxed lg:text-base/relaxed xl:text-base/relaxed">
               Empower your newsletters, Archive them beautifully. Boost SEO Instantly. Celebrate the art and creativity of newsletters. Explore our archive and enjoy the best newsletters, all in one place.
             </p>
           </div>

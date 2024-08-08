@@ -17,7 +17,7 @@ const LoginButton: React.FC = () => {
   return (
     <>
       {session ? (
-        <div>Logged in as {session.user?.email}</div>
+        <div>Hello!</div>
       ) : (
         <Button onClick={handleLogin} className="text-xs pt-1 pb-1 m-0 h-6 font-medium hover:bg-[#ccc]">
           Login

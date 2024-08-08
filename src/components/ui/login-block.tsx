@@ -78,7 +78,7 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
             <form onSubmit={handleLoginSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="myemail@myawesomecompany.com" required className="block w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+                <Input id="email" type="email" placeholder="myemail@myawesomecompany.com" required className="block text-xl w-full px-3 py-2 border border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
@@ -92,7 +92,7 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
               <Button type="submit" className="w-full flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md hover:bg-muted transition duration-300">
                 Sign in <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="w-full flex items-center justify-center bg-[#292929] px-4 py-2 border border-gray-500 rounded-md text-white hover:bg-primary hover:border-gray-200 dark:text-white dark:hover:border-primary hover:text-white transition duration-300" onClick={() => signIn("google")}>
+              <Button variant="outline" className="w-full flex items-center justify-center bg-[#292929] px-4 py-2 border border-gray-500 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-primary hover:text-white transition duration-300" onClick={() => signIn("google")}>
                 <ChromeIcon className="mr-2 ml-2 h-4 w-4" />
                 Sign in with Google
               </Button>
