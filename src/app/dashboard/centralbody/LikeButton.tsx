@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react"; // Include useSession hook for session management
 import { Button } from "@/components/ui/button";
-import { HeartIcon } from "lucide-react";
+import { Heartempty, Heartfull } from "@/assets/svg";
 
 interface LikeButtonProps {
   userId: string;
@@ -54,7 +54,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ userId, newsletterId }) => {
 
   return (
     <Button variant="ghost" size="icon" onClick={handleLikeClick}>
-      <HeartIcon className={`h-5 w-5 ${liked ? 'text-red-500' : ''}`} />
+      <Heartempty className={`h-7 w-7 ${liked ? 'text-red-500' : ''}`} />
     </Button>
   );
 };

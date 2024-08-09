@@ -2,8 +2,8 @@
 
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { HandMetal } from "lucide-react";
 import confetti from "canvas-confetti";
+import { Yourock } from "@/assets/svg";
 
 const YouRockButton: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -47,9 +47,9 @@ const YouRockButton: React.FC = () => {
         onMouseDown={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
         onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
-        <HandMetal className="h-5 w-5" />
+        <Yourock className="h-7 w-7" />
       </Button>
-      <p className="ml-2 text-sm bg-yellow-500 dark:text-black py-1 px-2 rounded-xl">{clickCount}</p> {/* Display click count next to the button */}
+      <p className="ml-2 text-md font-bold bg-yellow-500 dark:text-black py-1 px-2 rounded-xl">{clickCount}</p> {/* Display click count next to the button */}
       {showModal && (
         <div
           className="absolute flex items-center justify-center"
@@ -79,7 +79,7 @@ const YouRockButton: React.FC = () => {
               borderTop: "8px solid #000",
             }}
           />
-          <p className="text-[8px]">You rock it!</p>
+          <p className="text-[12px]">You rock it!</p>
         </div>
       )}
     </div>
