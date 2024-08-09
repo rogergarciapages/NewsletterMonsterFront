@@ -1,5 +1,3 @@
-// src/components/component/login-block.tsx
-
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -7,6 +5,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState, FC } from "react";
 import { useTheme } from "next-themes";
+import { Gdpr } from "@/assets/svg";
 
 interface LoginBlockProps {
   onRegisterClick: () => void;
@@ -57,28 +56,33 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
 
   return (
     <div className="grid w-full min-h-screen grid-cols-1 lg:grid-cols-2">
-      <div className={`relative flex items-center justify-center p-6 lg:p-12 ${theme === "dark" ? "dark:bg-none" : "bg-none"}`} style={{ background: getBackgroundStyle() }}>
+      <div className="relative flex items-center justify-center p-6 lg:p-12 dark:bg-none bg-none">
         <div className="relative max-w-[480px] space-y-6">
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
+            <h1 className="text-5xl font-bold tracking-tighter sm:text-5xl md:text-7xl text-primary">
               Welcome to Newsletter Monster!
             </h1>
-            <p className="text-gray-700 dark:text-white md:text-xl">
+            <p className="text-gray-700 dark:text-white text-lg leading-7 pb-5">
               Sign up and start expanding your newsletter reach today.
             </p>
-          </div>
-          <Button variant="outline" onClick={onRegisterClick} className="flex items-center justify-center border-primary text-primary dark:text-white hover:bg-secondary hover:border-secondary transition duration-300">
-            Sign up <ArrowRightIcon className="ml-2 h-4 w-4" />
-          </Button>
+            <p className="text-gray-700 dark:text-gray-400 md:text-s">
+              By creating an account, you agree to our Terms and have read and acknowledge the Global Privacy Statement.
+            </p>
+            <p className="text-gray-700 dark:text-gray-400 md:text-s">
+              Invisible reCAPTCHA by Google Privacy Policy and Terms of Use.
+            </p>
+            <p className="text-gray-700 dark:text-gray-400 md:text-s">
+              Mailchimp is GDPR compliant. Learn more about how you can use Mailchimp in a GDPR compliant way.
+            </p>
+            <Gdpr className="text-7xl text-gray-500" />      
+            </div>
         </div>
       </div>
       <div className="flex items-center justify-center p-6 lg:p-12">
         <div className="mx-auto w-full max-w-[480px] space-y-6">
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold">Sign in to your account</h2>
-            <p className="text-gray-700 dark:text-gray-200">
-              Enter your email and password below to sign in.
-            </p>
+            <p className="text-gray-700 dark:text-gray-200">Yep, you know what to do.</p>
           </div>
           {error && <div className="text-red-500 text-center">{error}</div>}
           <div className="space-y-4">
