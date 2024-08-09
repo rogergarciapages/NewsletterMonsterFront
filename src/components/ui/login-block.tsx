@@ -5,7 +5,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useState, FC } from "react";
 import { useTheme } from "next-themes";
-import { Gdpr } from "@/assets/svg";
+import { DiscordIcon, Gdpr, GoogleIcon, LinkedInIcon, Arrowbigright } from "@/assets/svg";
 
 interface LoginBlockProps {
   onRegisterClick: () => void;
@@ -72,7 +72,7 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
               Invisible reCAPTCHA by Google Privacy Policy and Terms of Use.
             </p>
             <p className="text-gray-700 dark:text-gray-400 md:text-s">
-              Mailchimp is GDPR compliant. Learn more about how you can use Mailchimp in a GDPR compliant way.
+              NewsletterMonster is GDPR compliant. Learn more about how you can use NewsletterMonster in a GDPR compliant way.
             </p>
             <Gdpr className="text-7xl text-gray-500" />      
             </div>
@@ -119,18 +119,18 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
                 </div>
               </div>
               <Button type="submit" className="w-full flex items-center text-md justify-center px-4 py-6 bg-primary text-white rounded-md hover:bg-muted transition duration-300">
-                Sign in <ArrowRightIcon className="ml-2 h-4 w-4" />
+                Sign in <Arrowbigright className="ml-2 h-6 w-6" />
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-indigo-900 px-4 py-6 border border-gray-500 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("google")}>
-                <ChromeIcon className="mr-2 ml-2 h-4 w-4" />
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-indigo-900 px-4 py-6 border border-indigo-900 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("google")}>
+                <GoogleIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with Google
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#7289da] px-4 py-6 border border-gray-500 rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
-                <DiscordIcon className="mr-2 ml-2 h-4 w-4" />
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#7289da] px-4 py-6 border border-[#7289da] rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
+                <DiscordIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with Discord
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#0077b5] px-4 py-6 border border-gray-500 rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("linkedin")}>
-                <LinkedInIcon className="mr-2 ml-2 h-4 w-4" />
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#0077b5] px-4 py-6 border border-[#0077b5] rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("linkedin")}>
+                <LinkedInIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with LinkedIn
               </Button>
             </form>
@@ -147,60 +147,5 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
   );
 };
 
-const ArrowRightIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="4"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="text-white ml-2"
-  >
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-);
-
-const ChromeIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-google">
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945z" />
-  </svg>
-);
-
-const DiscordIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-discord">
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-    <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-    <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
-    <path d="M7 16.5c3.5 1 6.5 1 10 0" />
-  </svg>
-);
-
-const LinkedInIcon: FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mr-2 icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin">
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-    <path d="M8 11l0 5" />
-    <path d="M8 8l0 .01" />
-    <path d="M12 16l0 -5" />
-    <path d="M16 16v-3a2 2 0 0 0 -4 0" />
-  </svg>
-);
 
 export default LoginBlock;

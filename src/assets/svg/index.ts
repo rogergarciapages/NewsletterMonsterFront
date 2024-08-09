@@ -1,1 +1,5 @@
 export { default as Gdpr} from "./Gdpr.svg"
+export { default as GoogleIcon } from "./Icongoogle.svg"
+export { default as DiscordIcon } from "./Icondiscord.svg"
+export { default as LinkedInIcon } from "./Iconlinkedin.svg"
+export { default as Arrowbigright } from "./Arrowbigright.svg"
