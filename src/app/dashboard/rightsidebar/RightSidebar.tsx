@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { PlusIcon } from "lucide-react";
+import { Plusicon } from "@/assets/svg";
 import { Button } from "../ui/button";
 
 const RightSidebar = () => {
@@ -26,7 +26,7 @@ const RightSidebar = () => {
                 size="icon"
                 className="ml-auto hover:bg-primary"
               >
-                <PlusIcon className="h-5 w-5" />
+                <Plusicon className="h-5 w-5" />
               </Button>
             </div>
             <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ const RightSidebar = () => {
                 size="icon"
                 className="ml-auto hover:bg-primary"
               >
-                <PlusIcon className="h-5 w-5" />
+                <Plusicon className="h-5 w-5" />
               </Button>
             </div>
             <div className="flex items-center gap-2">
@@ -64,7 +64,7 @@ const RightSidebar = () => {
                 size="icon"
                 className="ml-auto hover:bg-primary"
               >
-                <PlusIcon className="h-5 w-5" />
+                <Plusicon className="h-5 w-5" />
               </Button>
             </div>
           </div>

@@ -118,18 +118,18 @@ export const LoginBlock: FC<LoginBlockProps> = ({ onRegisterClick }) => {
                   </button>
                 </div>
               </div>
-              <Button type="submit" className="w-full flex items-center text-md justify-center px-4 py-6 bg-primary text-white rounded-md hover:bg-muted transition duration-300">
+              <Button type="submit" className="w-full flex items-center text-md justify-center px-4 py-6 bg-primary text-white rounded-md hover:bg-primary hover:bg-primary-900 transition duration-300">
                 Sign in <Arrowbigright className="ml-2 h-6 w-6" />
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-indigo-900 px-4 py-6 border border-indigo-900 rounded-md text-white hover:bg-secondary hover:border-gray-200 dark:text-white dark:hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("google")}>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-indigo-900 px-4 py-6 border border-indigo-900 rounded-md text-white hover:bg-indigo-900 hover:bg-opacity-75 hover:border-indigo-900 dark:text-white dark:hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("google")}>
                 <GoogleIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with Google
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#7289da] px-4 py-6 border border-[#7289da] rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("discord")}>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#7289da] px-4 py-6 border border-[#7289da] rounded-md text-white dark:hover:border-[#7289da] hover:bg-[#7289da] hover:bg-opacity-80 hover:border-[#7289da] hover:text-white transition duration-300" onClick={() => signIn("discord")}>
                 <DiscordIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with Discord
               </Button>
-              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#0077b5] px-4 py-6 border border-[#0077b5] rounded-md text-white dark:hover:border-indigo-900 hover:bg-secondary hover:border-indigo-900 hover:text-white transition duration-300" onClick={() => signIn("linkedin")}>
+              <Button variant="outline" className="w-full flex items-center text-md justify-center bg-[#0077b5] px-4 py-6 border border-[#0077b5] rounded-md text-white dark:hover:border-indigo-900 hover:bg-[#0077b5] hover:bg-opacity-80 hover:border-[#0077b5] hover:text-white transition duration-300" onClick={() => signIn("linkedin")}>
                 <LinkedInIcon className="mr-4 ml-2 h-6 w-6" />
                 Sign in with LinkedIn
               </Button>

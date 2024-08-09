@@ -1,11 +1,11 @@
-// src/app/api/auth/[...nextauth]/route.ts
-
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import DiscordProvider from "next-auth/providers/discord";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -34,6 +34,51 @@ const authOptions: NextAuthOptions = {
         params: {
           scope: "r_liteprofile r_emailaddress",
         },
+      },
+    }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // Add logging for debugging
+        console.log('Attempting to authorize with credentials:', credentials);
+
+        if (!credentials?.email || !credentials.password) {
+          console.error("Missing email or password");
+          return null;
+        }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        });
+
+        // Check if user exists
+        if (!user) {
+          console.error("User not found with email:", credentials.email);
+          return null;
+        }
+
+        // Compare the provided password with the hashed password stored in the database
+        const isValidPassword = await bcrypt.compare(credentials.password, user.password);
+
+        if (!isValidPassword) {
+          console.error("Invalid password for user:", credentials.email);
+          return null;
+        }
+
+        console.log('User authenticated successfully:', user);
+
+        return {
+          id: user.user_id, // Mapping user_id to id
+          name: user.name,
+          email: user.email,
+          image: user.profile_photo ?? undefined, // Ensure image is string or undefined
+        };
       },
     }),
   ],
@@ -92,7 +137,7 @@ const authOptions: NextAuthOptions = {
               surname: user.name?.split(" ").slice(1).join(" ") ?? "Default Surname",
               company_name: "Default Company",
               username: username,
-              password: username,
+              password: await bcrypt.hash(username, 10), // Hash the password before saving
             },
           });
           userId = newUser.user_id;
